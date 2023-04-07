@@ -1,0 +1,28 @@
+<div class="footer-wrapper">
+  <div class="footer-container">
+    <div class="footer-desc">
+      <div class="footer-logo">
+        <img src="../../../../../assets/icons/pet-search-high-resolution-logo-white-on-transparent-background (1).svg" alt="logo">
+      </div>
+      <div class="footer-title">
+        Our website will help you find your lost pet and return it home
+      </div>
+      <div class="footer-networks">
+        <img src="../../../../../assets/icons/Facebook.svg" alt="logo">
+        <img src="../../../../../assets/icons/Instagram.svg" alt="logo">
+        <img src="../../../../../assets/icons/Linkedin.svg" alt="logo">
+        <img src="../../../../../assets/icons/Twitter.svg" alt="logo">
+      </div>
+    </div>
+      <div class="footer-categories">
+        <div 
+          *ngFor="let category of categories"
+          class="category" 
+          [routerLink]="[category.route]"
+          routerLinkActive="category-active">
+          <fa-icon class="category-icon" [icon]="category.icon"></fa-icon>
+          <div class="category-title">{{category.title}}</div>
+        </div>
+      </div>
+  </div>
+</div>

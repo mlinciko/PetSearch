@@ -1,0 +1,134 @@
+.dx-gallery-indicator-item-active, .dx-gallery-indicator-item-selected {
+  background: #1B4571; 
+}
+.dx-gallery-indicator-item {
+  background: #1B4571; 
+}
+.dx-button-mode-contained.dx-button-default {
+  border-radius: 20px;
+  background-color: #1B4571;
+}
+.dx-button-mode-contained.dx-button-default.dx-state-active,
+.dx-button-mode-contained.dx-button-default.dx-state-hover,
+.dx-button-mode-contained.dx-button-default.dx-state-focused {
+  background-color: #1B4571;
+}
+
+.dx-htmleditor {
+  border-color: transparent;
+}
+
+.dx-field-item-required .dx-label > span::after, .dx-field-item-required-mark {
+  color: #999;
+}
+
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label-before {
+  border-color:#FAFAFA;
+  border-bottom-left-radius: 12px;
+  border-top-left-radius: 12px;
+}
+
+.dx-editor-outlined.dx-texteditor-with-floating-label .dx-texteditor-label .dx-label-before {
+  border-bottom-left-radius: 12px;
+  border-top-left-radius: 12px;
+}
+
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label {
+  border-color:#FAFAFA;
+}
+
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label-after {
+  border-color:#FAFAFA;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.dx-editor-outlined.dx-texteditor-with-floating-label .dx-texteditor-label .dx-label-after {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.dx-texteditor-input {
+  background-color: #FAFAFA;
+  border-radius: 12px;
+}
+
+.dx-editor-outlined.dx-state-focused .dx-texteditor-input {
+  background-color: #EEF4FF;
+}
+
+.dx-editor-outlined.dx-state-focused.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label-after,
+.dx-editor-outlined.dx-state-hover.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label-after {
+  border-color:#1B4571;
+}
+
+.dx-editor-outlined.dx-state-focused.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label
+.dx-editor-outlined.dx-state-hover.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label {
+  border-color:#1B4571;
+}
+
+.dx-editor-outlined.dx-state-focused.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label-after,
+.dx-editor-outlined.dx-state-hover.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label-after {
+  border-color:#1B4571;
+}
+
+.dx-texteditor.dx-state-focused .dx-texteditor-label {
+  color:#1B4571;
+}
+.dx-texteditor.dx-state-hover .dx-texteditor-label,
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused.dx-state-hover .dx-texteditor-label .dx-label span{
+  color:#1B4571;
+}
+
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused .dx-texteditor-label .dx-label,
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-hover .dx-texteditor-label .dx-label,
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused.dx-state-hover .dx-texteditor-label .dx-label,
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-texteditor-empty.dx-state-hover .dx-texteditor-label .dx-label {
+  border-bottom-color:#1B4571;
+  border-top-color:#1B4571;
+}
+
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused .dx-texteditor-label .dx-label-before,
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-hover .dx-texteditor-label .dx-label-before,
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused.dx-state-hover .dx-texteditor-label .dx-label-before,
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-texteditor-empty.dx-state-hover .dx-texteditor-label .dx-label-before,
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-hover .dx-texteditor-label .dx-label-after {
+  border-color:#1B4571;
+}
+
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused.dx-invalid .dx-texteditor-label .dx-label-after {
+  border-color: #d9534f;
+}
+
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-hover.dx-invalid .dx-texteditor-label .dx-label,
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused.dx-state-hover.dx-invalid .dx-texteditor-label .dx-label span {
+  color:#d9534f;
+}
+
+.dx-checkbox-checked .dx-checkbox-icon {
+  color:#1B4571;
+}
+
+.dx-checkbox-checked.dx-state-focused .dx-checkbox-icon,
+.dx-checkbox-checked.dx-state-hover .dx-checkbox-icon,
+.dx-checkbox.dx-state-hover .dx-checkbox-icon,
+.dx-checkbox.dx-state-focused .dx-checkbox-icon   {
+  border: 2px solid #1B4571;
+  border-radius:5px;
+}
+
+.dx-checkbox-icon {
+  border-radius:5px;
+}
+
+.dx-toast-error .dx-toast-icon {
+  display:none;
+}
+
+.dx-toast-content {
+  font-weight: 400;
+}
+
+.dx-toast-error {
+  background-color: rgba(217, 83, 79, 0.8);
+}

@@ -1,0 +1,29 @@
+.signin-image {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  padding-bottom: 100px;
+}
+
+.signin-container {
+  width: 200px;
+  margin: 0 auto;
+
+  .signin-title {
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    padding-bottom: 20px;
+  }
+
+  .signin-registry {
+    color:#A09FA0;
+    padding: 10px 0;
+    text-align: center;
+
+    .signin-registry-link {
+      color: #1B4571;
+      cursor: pointer;
+    }
+  }
+}

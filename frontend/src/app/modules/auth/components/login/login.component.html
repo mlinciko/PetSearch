@@ -1,0 +1,20 @@
+<div class="login-container">
+  <fa-icon class="login-back" [icon]="backIcon" [routerLink]="['/sign']"></fa-icon>
+  <div class="login-title">Login to Your Account</div>
+  <dx-form #form width="300px" [(formData)]='formData' [items]="formItems">
+  </dx-form>
+  <div class="login-rememberme">
+    <div class="login-rememberme-value">
+      <dx-check-box [(value)]="rememberMe" iconSize="15px"></dx-check-box>
+    </div>
+    <div class="login-rememberme-title">Remember me</div>
+  </div>
+  <dx-button
+        stylingMode="contained"
+        text="Sign in"
+        type="default"
+        width="100%"
+        (onClick)="submitForm()"
+    >
+  </dx-button>
+</div>

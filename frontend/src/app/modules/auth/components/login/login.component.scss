@@ -1,0 +1,43 @@
+.login-container {
+  width: 300px;
+  margin: 0 auto;
+
+  .login-back {
+    color: #1B4571;
+    cursor:pointer;
+  }
+
+  .login-image {
+    display: block;
+    margin: 0 auto;
+    padding-bottom:30px;
+  }
+
+  .login-title {
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    padding-bottom: 20px;
+  }
+
+  .login-rememberme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 0;
+
+    .login-rememberme-title {
+      font-size: 12px;
+    }
+  }
+}
+
+:host {
+  ::ng-deep {
+    .remember-me {
+      flex-grow: 0!important;
+      margin: 0 auto;
+    }
+  }
+}

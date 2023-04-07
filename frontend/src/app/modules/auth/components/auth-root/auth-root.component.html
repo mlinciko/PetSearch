@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="left-container">
+    <dx-gallery
+      [dataSource]="sliderItems"
+      height="100vh"
+      width="100%"
+      [loop]="true"
+      [showIndicator]="true"
+      [slideshowDelay]="3000"
+      [animationDuration]="600"
+    >
+      <div *dxTemplate="let sliderItem of 'item'">
+        <div class="slider-container">
+          <img src="{{ sliderItem.image }}" />
+          <div class="slider-title">{{sliderItem.title}}</div>
+        </div>
+      </div>
+    </dx-gallery>
+  </div>
+  <div class="right-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="registry-container">
+  <fa-icon class="registry-back" [icon]="backIcon" [routerLink]="['/sign']"></fa-icon>
+  <div class="registry-title">Create New Account</div>
+  <dx-form #form width="300px" [(formData)]='formData' [items]="formItems">
+  </dx-form>
+  <div class="registry-rememberme">
+    <div class="registry-rememberme-value">
+      <dx-check-box [(value)]="rememberMe" iconSize="15px"></dx-check-box>
+    </div>
+    <div class="registry-rememberme-title">Remember me</div>
+  </div>
+  <dx-button
+        stylingMode="contained"
+        text="Sign up"
+        type="default"
+        width="100%"
+        (onClick)="submitForm()"
+    >
+  </dx-button>
+</div>

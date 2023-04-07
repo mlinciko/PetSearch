@@ -1,0 +1,34 @@
+<div class="header-wrapper">
+  <div class="header-container">
+    <div class="header-logo">
+      <img src="../../../../../assets/icons/pet-search-high-resolution-logo-white-on-transparent-background (1).svg" alt="logo">
+    </div>
+  
+    <div class="header-categories">
+      <div 
+        *ngFor="let category of categories"
+        class="category" 
+        [routerLink]="[category.route]"
+        routerLinkActive="category-active">
+        <fa-icon class="category-icon" [icon]="category.icon"></fa-icon>
+        <div class="category-title">{{category.title}}</div>
+      </div>
+    </div>
+  
+    <div *ngIf="isUserAuthorized" class="header-account">
+      <ng-container *ngIf="user.image; else noImage">
+        <img class="account-image" [src]="getUserImage(user.image)" alt="image">
+      </ng-container>
+      <ng-template #noImage>
+        <fa-icon class="account-icon" [icon]="noImageIcon"></fa-icon>
+      </ng-template>
+      <div class="account-data">
+        <div class="account-name">{{user.first_name}} {{user.last_name}}</div>
+      </div>
+    </div>
+
+    <div class="header-signin" *ngIf="!isUserAuthorized" matTooltip="Sign in" [routerLink]="['/sign']">
+      <fa-icon [icon]="signinIcon"></fa-icon>
+    </div>
+  </div>
+</div>

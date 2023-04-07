@@ -1,0 +1,36 @@
+.container {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.left-container {
+  width: 60%;
+  border-right: 3px solid #1B4571;
+}
+
+.right-container {
+  width: 40%;
+}
+
+.slider-container {
+  padding: 50px 0;
+  height: 100%;
+
+  img {
+    width: 80%;
+    object-fit: cover;
+    height: 90%;
+    border-radius: 40px;
+  }
+
+  .slider-title {
+    color: #1B4571;
+    font-weight: 800;
+    font-size: 24px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 10px 0;
+  }
+}
