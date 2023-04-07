@@ -1,0 +1,25 @@
+<div class="menu-container">
+  <div *ngIf="user" class="menu__user-data user-data">
+    <ng-container *ngIf="user.image; else noImage">
+      <img class="user-data__image" [src]="getUserImage(user.image)" alt="image">
+    </ng-container>
+    <ng-template #noImage>
+      <fa-icon class="user-data__icon" [icon]="noImageIcon"></fa-icon>
+    </ng-template>
+    <div class="user-data__name">
+      {{user.first_name}} {{user.last_name}}
+    </div>
+  </div>
+  <div class="menu__blocks">
+    <div *ngFor="let block of menuItems" class="menu__block">
+      <div 
+        *ngFor="let item of block.items" 
+        class="menu__item" 
+        [routerLink]="[item.path]"
+        routerLinkActive="menu__item-active"
+        (click)="selectMenuItem(item)">
+        {{item.title}}
+      </div>
+    </div>
+  </div>
+</div>

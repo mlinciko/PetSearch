@@ -57,24 +57,39 @@ export class UserService {
     )
   }
 
+  updateUser(user: IUser): Observable<IUser> {
+    return this.http.patch<IUser>(this.restUrl, user)
+    .pipe(
+      map(
+        (res: IUser) => {
+          this.user.next(res);
+          return res;
+        }
+      ),
+      catchError((err) => 
+        this.onCatchError(err, err.error.message ? err.error.message: "Error while updating user data"))
+    )
+  }
+
+  deleteUser(): Observable<string> {
+    const userId = this.user.value.user_id;
+    return this.http.delete<string>(`${this.restUrl}?user_id=${userId}`)
+    .pipe(
+      catchError((err) => 
+        this.onCatchError(err, err.error.message ? err.error.message: "Error while deleting user"))
+    )
+  }
+
   isUserAuthrized(): boolean {
     return !!this.user.value;
   }
 
   setUser(user: IUser | null) {
-    this.user.next(user)
+    this.user.next(user);
   }
 
-  checkRoles(roles: string[]): boolean {
-    if (roles.length === 0) {
-      return true;
-    }
-    for (const role of this.user.value.roles) {
-      if (roles.includes(role.name)){
-        return true;
-      }
-    }
-    return false;
+  unsetUser(): void {
+    this.user.next(null);
   }
 
   onCatchError(err: HttpErrorResponse, message: string): Observable<never> {

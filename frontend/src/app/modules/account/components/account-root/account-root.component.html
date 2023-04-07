@@ -1,0 +1,9 @@
+<div class="account-container">
+  <div class="account-menu">
+    <app-account-root-menu></app-account-root-menu>
+  </div>
+  <div class="account-data__container">
+    <div class="account-data__title">{{account.activeMenuItem.value.title}}</div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

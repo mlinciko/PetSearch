@@ -1,0 +1,39 @@
+.menu-container {
+  .menu__user-data {
+    padding: 10px;
+    background-color: #b3d1ef;
+    border-radius: 10px;
+    color: #fff;
+    margin-bottom:20px;
+
+    .user-data {
+      &__icon {
+        font-size: 60px;
+      }
+      &__name {
+        padding-top: 20px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .menu__blocks {
+    .menu__block {
+      padding: 10px;
+      background-color: #b3d1ef;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      margin-bottom:20px;
+
+      .menu__item {
+        cursor: pointer;
+        padding-bottom:5px;
+      }
+
+      .menu__item-active {
+        color:#1B4571;
+      }
+    }
+  }
+}

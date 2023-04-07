@@ -69,9 +69,9 @@ export class AuthService {
     )
   }
 
-  logout(): void {
+  logoutClient(): void {
     localStorage.removeItem("access_token");
-    this.router.navigate(['/sign'])
+    this.router.navigate(['/'])
   }
 
   isTokenExpired(): boolean {
@@ -106,7 +106,7 @@ export class AuthService {
   }
 
   onCatchError(err: HttpErrorResponse, message: string): Observable<never> {
-    if (err.status !== 403 && err.status === 401) {
+    if (err.status !== 403 && err.status !== 401) {
       notify({ message, type: "error", width: "auto"});
     }
     return throwError(err);

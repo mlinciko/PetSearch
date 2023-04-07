@@ -15,7 +15,7 @@
       </div>
     </div>
   
-    <div *ngIf="isUserAuthorized" class="header-account">
+    <div *ngIf="isUserAuthorized" class="header-account" [routerLink]="['/account']">
       <ng-container *ngIf="user.image; else noImage">
         <img class="account-image" [src]="getUserImage(user.image)" alt="image">
       </ng-container>

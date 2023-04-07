@@ -5,8 +5,11 @@
   background: #1B4571; 
 }
 .dx-button-mode-contained.dx-button-default {
-  border-radius: 20px;
   background-color: #1B4571;
+  border-radius: 20px;
+}
+.dx-button-mode-contained.dx-button-normal {
+  border-radius: 20px;
 }
 .dx-button-mode-contained.dx-button-default.dx-state-active,
 .dx-button-mode-contained.dx-button-default.dx-state-hover,
@@ -121,7 +124,7 @@
   border-radius:5px;
 }
 
-.dx-toast-error .dx-toast-icon {
+.dx-toast-icon {
   display:none;
 }
 
@@ -131,4 +134,8 @@
 
 .dx-toast-error {
   background-color: rgba(217, 83, 79, 0.8);
+}
+
+.dx-state-disabled.dx-widget {
+  opacity: 0.8;
 }

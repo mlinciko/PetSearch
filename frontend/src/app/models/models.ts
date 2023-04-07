@@ -20,7 +20,6 @@ export interface IUser {
 
 export interface IGuardPathes {
   regExp: RegExp | string;
-  roles: string[];
   message: string;
-  additionalRule?: "tokenDosentExsists" | "tokenDosentExpired",
+  additionalRule?: "tokenDosentExists" | "tokenDosentExpired" | "tokenExists",
 }

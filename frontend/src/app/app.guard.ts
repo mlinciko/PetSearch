@@ -20,12 +20,10 @@ export class AppGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const backUrl = "/";
-    console.log("GUARD")
     const { canActivate, message } = this.canBeRouted(
       guardPathes,
       state.url
     );
-    console.log(canActivate, message)
 
     if (!canActivate) {
       notify({ message: message, type: "error", width: "auto"});
@@ -40,11 +38,9 @@ export class AppGuard implements CanActivate {
     url: string
   ): { canActivate: boolean; message: string } {
     for (const path of pathes) {
-      const { regExp, roles, message, additionalRule } = path;
-      console.log(RegExp(regExp).test(url), url)
+      const { regExp, message, additionalRule } = path;
       if (RegExp(regExp).test(url)) {
-        if (additionalRule === "tokenDosentExsists" && this.auth.isTokenExists()) {
-          console.log(additionalRule, this.auth.isTokenExists())
+        if (additionalRule === "tokenDosentExists" && this.auth.isTokenExists()) {
           return {
             canActivate: false,
             message,
@@ -56,9 +52,15 @@ export class AppGuard implements CanActivate {
             message: "Please re-authorize",
           };
         }
+        if (additionalRule === "tokenExists" && !this.auth.isTokenExists()) {
+          return {
+            canActivate: false,
+            message: message,
+          };
+        }
 
         return {
-          canActivate: this.user.checkRoles(roles),
+          canActivate: true,
           message,
         };
       }

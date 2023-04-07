@@ -1,0 +1,35 @@
+<div class="profile-delete">
+  <dx-button
+    stylingMode="contained"
+    text="Delete profile"
+    type="normal"
+    width="150px"
+    (onClick)="confirmDeleting()"
+    >
+  </dx-button>
+</div>
+<div class="profile-container">
+  <fa-icon class="profile-edit" [icon]="editIcon" (click)="editForm()"></fa-icon>
+  <dx-form #form width="100%" [(formData)]='formData' [items]="formItems" [disabled]="!isFormEditing">
+  </dx-form>
+  <div class="profile-buttons">
+    <dx-button
+      stylingMode="contained"
+      text="Edit profile"
+      type="default"
+      width="50%"
+      [visible]="isFormEditing"
+      (onClick)="submitEditingForm()"
+        >
+    </dx-button>
+    <dx-button
+      stylingMode="contained"
+      text="Cancel"
+      type="normal"
+      width="50%"
+      [visible]="isFormEditing"
+      (onClick)="cancelEditingForm()"
+    >
+    </dx-button>
+  </div>
+</div>

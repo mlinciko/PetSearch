@@ -1,0 +1,22 @@
+.account-container {
+  width: 80%;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin: 100px auto;
+
+  .account-menu {
+    width: 20%;
+  }
+
+  .account-data__container {
+    width:80%;
+
+    .account-data__title {
+      font-size: 18px;
+      color: #1B4571;
+      border-bottom: 2px solid #1B4571;
+      padding-bottom: 10px;
+    }
+  }
+}
