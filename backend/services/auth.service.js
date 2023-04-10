@@ -90,35 +90,3 @@ export const logoutUser = (req, res, next) => {
   res.clearCookie(COOKIE_NAME)
   res.status(200).json({ message: 'User has been logout' })
 }
-
-// export const removeUser = async (req, res, next) => {
-//   const usernameOrEmail = req.body?.usernameOrEmail
-
-//   if (!usernameOrEmail) {
-//     return res
-//       .status(400)
-//       .json({ message: 'Username or email must be provided' })
-//   }
-
-//   try {
-//     let user
-//     if (usernameOrEmail.includes('@')) {
-//       user = await User.findOne({ email: usernameOrEmail })
-//     } else {
-//       user = await User.findOne({ username: usernameOrEmail })
-//     }
-
-//     if (!user) {
-//       return res.status(404).json({ message: 'User not found' })
-//     }
-
-//     await user.remove()
-
-//     res
-//       .status(200)
-//       .json({ message: `User ${usernameOrEmail} has been removed` })
-//   } catch (e) {
-//     console.log('*removeUser service')
-//     next(e)
-//   }
-// }

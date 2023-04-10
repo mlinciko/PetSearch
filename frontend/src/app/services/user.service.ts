@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import notify from 'devextreme/ui/notify';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IUser } from '../models/models';
+import { IChangePass, IUser } from '../models/models';
 import { AuthService } from '../modules/auth/services/auth.service';
 
 @Injectable({
@@ -80,6 +80,14 @@ export class UserService {
     )
   }
 
+  changePassword(payload: IChangePass): Observable<string> {
+    return this.http.patch<string>(`${this.restUrl}password-change/`, payload)
+    .pipe(
+      catchError((err) => 
+        this.onCatchError(err, err.error.message ? err.error.message: "Error while changing password"))
+    )
+  }
+
   isUserAuthrized(): boolean {
     return !!this.user.value;
   }
@@ -92,8 +100,12 @@ export class UserService {
     this.user.next(null);
   }
 
+  getUserId(): number {
+    return this.user.value.user_id;
+  }
+
   onCatchError(err: HttpErrorResponse, message: string): Observable<never> {
-    if (err.status !== 403 && err.status === 401) {
+    if (err.status !== 403 && err.status !== 401) {
       notify({ message, type: "error", width: "auto"});
     }
     return throwError(err);

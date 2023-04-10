@@ -69,8 +69,13 @@ export class AuthService {
     )
   }
 
+  logout(): void {
+    this.http.get(`${this.restUrl}logout/`, { withCredentials: true }).subscribe();
+  }
+
   logoutClient(): void {
     localStorage.removeItem("access_token");
+    this.accessToken.next("");
     this.router.navigate(['/'])
   }
 
@@ -96,9 +101,10 @@ export class AuthService {
     .pipe(
       map((res: IToken) => {
         this.accessToken.next(res.accessToken);
-        if (this.rememberMe.value) {
-          localStorage.setItem("access_token", res.accessToken)
-        }
+        // if (this.rememberMe.value) {
+        //   localStorage.setItem("access_token", res.accessToken)
+        // }
+        localStorage.setItem("access_token", res.accessToken)
         return res;
       }),
       catchError((err) => this.onCatchError(err, "Unexpected token error!"))

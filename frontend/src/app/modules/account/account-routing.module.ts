@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountRootComponent } from './components/account-root/account-root.component';
 import { ProfileManagementComponent } from './components/profile-management/profile-management.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { UserAnnouncementsComponent } from './components/user-announcements/user-announcements.component';
+import { UserFavoritesComponent } from './components/user-favorites/user-favorites.component';
 
 const routes: Routes = [
   {
@@ -16,10 +18,18 @@ const routes: Routes = [
       {
         path: "change-password",
         component: ChangePasswordComponent,
+      },
+      {
+        path: "user-announcements",
+        component: UserAnnouncementsComponent,
+      },
+      {
+        path: "favorites",
+        component: UserFavoritesComponent,
       }
     ]
   },
-  { path: "", pathMatch: "full", redirectTo: "all"},
+  { path: "", pathMatch: "full", redirectTo: "user-announcements"},
   { path: "**", redirectTo: "all" },
 ]
 

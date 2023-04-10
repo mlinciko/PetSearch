@@ -23,3 +23,9 @@ export interface IGuardPathes {
   message: string;
   additionalRule?: "tokenDosentExists" | "tokenDosentExpired" | "tokenExists",
 }
+
+export interface IChangePass {
+  password: string,
+  new_password: string,
+  user_id: number,
+}

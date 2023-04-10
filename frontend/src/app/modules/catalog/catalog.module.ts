@@ -3,23 +3,27 @@ import { CommonModule } from '@angular/common';
 import { CatalogRoutingModule } from './catalog-routing.module';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AllAnnouncementsComponent } from './components/all-announcements/all-announcements.component';
-import { PetSearchComponent } from './components/pet-search/pet-search.component';
-import { OwnerSearchComponent } from './components/owner-search/owner-search.component';
+import { AnnouncementService } from './services/announcement.service';
+import { MaterialModule } from '../material/material.module';
+import { SharedModule } from '../shared/shared.module';
+import { AnnouncementComponent } from './components/announcement/announcement.component';
+import { DevExtremeModule } from '../dev-extreme/dev-extreme.module';
 
 
 
 @NgModule({
   declarations: [
     CatalogComponent,
-    AllAnnouncementsComponent,
-    PetSearchComponent,
-    OwnerSearchComponent,
+    AnnouncementComponent,
   ],
   imports: [
     CommonModule,
     CatalogRoutingModule,
     FontAwesomeModule,
-  ]
+    MaterialModule,
+    SharedModule,
+    DevExtremeModule,
+  ],
+  providers: [AnnouncementService]
 })
 export class CatalogModule { }

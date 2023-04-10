@@ -6,7 +6,11 @@ import { AccountRoutingModule } from './account-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProfileManagementComponent } from './components/profile-management/profile-management.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
-import { DevExtremeModule } from 'devextreme-angular';
+import { MaterialModule } from '../material/material.module';
+import { SharedModule } from '../shared/shared.module';
+import { UserAnnouncementsComponent } from './components/user-announcements/user-announcements.component';
+import { UserFavoritesComponent } from './components/user-favorites/user-favorites.component';
+import { DevExtremeModule } from '../dev-extreme/dev-extreme.module';
 
 
 
@@ -15,13 +19,17 @@ import { DevExtremeModule } from 'devextreme-angular';
     AccountRootComponent,
     AccountRootMenuComponent,
     ProfileManagementComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    UserAnnouncementsComponent,
+    UserFavoritesComponent
   ],
   imports: [
     CommonModule,
     AccountRoutingModule,
     FontAwesomeModule,
     DevExtremeModule,
+    MaterialModule,
+    SharedModule,
   ]
 })
 export class AccountModule { }

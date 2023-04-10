@@ -1,5 +1,6 @@
 import { db } from "../index.js";
 import _ from 'lodash';
+import argon2 from 'argon2';
 
 export const getCurrentUser = async (req, res, next) => {
   const userId = req.user.user_id;
@@ -109,6 +110,52 @@ export const deleteUser = async(req, res, next) => {
 
   } catch (e) {
     console.log('*deleteUser service')
+    next(e)
+  }
+}
+
+export const changeUserPassword = async(req, res, next) => {
+  const tokenUserId = req.user.user_id;
+  const userId = req.body?.user_id;
+  const oldPassword = req.body?.password;
+  const newPassword = req.body?.new_password;
+
+  if (!userId) {
+    return res.status(400).json({ message: "User id must be provided" })
+  }
+  if (!oldPassword) {
+    return res.status(400).json({ message: "Old password must be provided" })
+  }
+  if (!newPassword) {
+    return res.status(400).json({ message: "New password must be provided" })
+  }
+  if (tokenUserId != userId) {
+    return res.status(400).json({ message: "You don't have permissions to do this" })
+  }
+  try {
+    const user = _.first(await db.query(`SELECT * FROM User WHERE user_id=${userId}`));
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' })
+    }
+
+    const isPasswordCorrect = await argon2.verify(user.password, oldPassword);
+    if (!isPasswordCorrect) {
+      return res.status(400).json({ message: 'Wrong credentials' })
+    }
+
+    const hashedPassword = await argon2.hash(newPassword)
+    await db.query(`UPDATE User SET 
+      password="${hashedPassword}"
+      WHERE user_id=${userId}
+    `)
+
+    
+    res
+      .status(200)
+      .json("Password has been changed successfully!")
+
+  } catch (e) {
+    console.log('*changeUserPassword service')
     next(e)
   }
 }

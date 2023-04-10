@@ -1,0 +1,29 @@
+.announcements-container {
+  gap: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  margin:40px auto;
+}
+
+.announcement-not-found {
+  width: 400px;
+  text-align: center;
+  margin: 40px auto;
+
+  .announcement-not-found__icon {
+    font-size: 40px;
+  }
+
+  .announcement-not-found__title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 20px 0;
+  }
+
+  .announcement-not-found__subtitle {
+    text-align: center;
+    font-weight: 300;
+    line-height: 1.5em;
+  }
+}

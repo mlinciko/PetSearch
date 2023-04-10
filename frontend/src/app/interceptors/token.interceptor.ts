@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 import notify from 'devextreme/ui/notify';
 
 const EXCLUDED_URLS = [
-  "/auth",
+  "/auth/login",
+  "/auth/register",
 ]
 
 @Injectable()

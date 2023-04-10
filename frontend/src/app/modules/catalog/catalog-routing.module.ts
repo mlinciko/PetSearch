@@ -1,21 +1,33 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AllAnnouncementsComponent } from './components/all-announcements/all-announcements.component';
-import { OwnerSearchComponent } from './components/owner-search/owner-search.component';
-import { PetSearchComponent } from './components/pet-search/pet-search.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
+import { announcementTypes } from './models/announcement-types';
+import { AnnouncementComponent } from './components/announcement/announcement.component';
 
 const routes: Routes = [
   {
     path: "all",
-    component: AllAnnouncementsComponent,
+    component: CatalogComponent,
+    data: { type: "all" },
   },
   {
     path: "pet-search",
-    component: PetSearchComponent,
+    component: CatalogComponent,
+    data: { type: announcementTypes['PET_SEARCH'] },
   },
   {
     path: "owner-search",
-    component: OwnerSearchComponent,
+    component: CatalogComponent,
+    data: { type: announcementTypes['OWNER_SEARCH'] },
+  },
+  {
+    path: "announcement",
+    children: [
+      {
+        path: "view/:id",
+        component: AnnouncementComponent,
+      }
+    ]
   },
   { path: "", pathMatch: "full", redirectTo: "all"},
   { path: "**", redirectTo: "all" },

@@ -7,9 +7,19 @@
     margin-bottom:20px;
 
     .user-data {
+      &__profile {
+        display: flex;
+        justify-content: space-between;
+      }
+
       &__icon {
         font-size: 60px;
       }
+
+      &__logout-icon {
+        cursor:pointer;
+      }
+
       &__name {
         padding-top: 20px;
         font-size: 16px;

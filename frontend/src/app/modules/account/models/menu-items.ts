@@ -3,18 +3,18 @@ import { IMenuItem } from "./menu-item.interface"
 export const ANNOUNCEMENTS_MENU_ITEMS: IMenuItem[] = [
   {
     title: "My announcements",
-    path: "/f",
+    path: "user-announcements",
   },
   {
     title: "Favorites",
-    path: "/f"
+    path: "favorites"
   }
 ]
 
 export const CHATS_MENU_ITEMS: IMenuItem[] = [
   {
     title: "Chats",
-    path: "/f",
+    path: "/g",
   },
 ]
 

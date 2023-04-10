@@ -1,0 +1,33 @@
+<div class="announcement">
+  <div class="announcement-image">
+    <img src="../../../../../assets/slider/img01.jpeg" alt="Image">
+    <div *ngIf="announcement.hasOwnProperty('is_favorite')" class="announcement-image__favorite">
+      <fa-icon 
+        *ngIf="announcement.is_favorite"  
+        class="announcement-image__favorite-red" 
+        matTooltip="Delete from favorites"
+        [icon]="favoriteIcon"
+        (click)="changeFavorite('delete', announcement)">
+      </fa-icon>
+      <fa-icon 
+        *ngIf="!announcement.is_favorite"  
+        class="announcement-image__favorite-grey" 
+        matTooltip="Add to favorites"
+        [icon]="favoriteIcon"
+        (click)="changeFavorite('add', announcement)">
+      </fa-icon>
+    </div>
+  </div>
+  <!-- <div class="announcement-image">
+    <img [src]="getImage(item)" alt="Image">
+  </div> -->
+  <div class="announcement-title" (click)="goToAnnouncement(announcement)">{{announcement.title}}</div>
+  <div class="announcement-date-pet">
+    <div class="announcement-date">{{announcement.createdAt | date: 'mediumDate' }}</div>
+    <div class="announcement-pet">{{announcement.pet_type_name }}</div>
+  </div>
+  <div class="announcement-city">
+    <fa-icon [icon]="locationIcon"></fa-icon>
+    {{announcement.city_name}} 
+  </div>
+</div>
