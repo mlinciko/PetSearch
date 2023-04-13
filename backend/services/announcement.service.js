@@ -1,5 +1,6 @@
 import { db } from "../index.js";
 import _ from 'lodash';
+import moment from 'moment';
 
 const ANNOUNCEMENT_QUERY = () => {
   return `
@@ -129,12 +130,57 @@ export const getAnnouncementById = async(req, res, next) => {
   }
 }
 export const createAnnouncement = async(req, res, next) => {
+  const userId = req?.user?.user_id;
+  const title = req.body?.title;
+  const descr = req.body?.descr;
+  const typeId = req.body?.type_id;
+  const cityId = req.body?.city_id;
+  const petId = req.body?.pet_id;
+
+  if (!userId) {
+    return res.status(400).json({ message: "User id must be provided" })
+  }
+  if (!title) {
+    return res.status(400).json({ message: "Title must be provided" })
+  }
+  if (!descr) {
+    return res.status(400).json({ message: "Describtion must be provided" })
+  }
+  if (!typeId) {
+    return res.status(400).json({ message: "Type id must be provided" })
+  }
+  if (!cityId) {
+    return res.status(400).json({ message: "City id must be provided" })
+  }
+  if (!petId) {
+    return res.status(400).json({ message: "Pet id must be provided" })
+  }
   try {
+    const user = _.first(await db.query(`SELECT * FROM User WHERE user_id=${userId}`));
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' })
+    }
+    const type = _.first(await db.query(`SELECT * FROM Type WHERE type_id=${typeId}`));
+    if (!type) {
+      return res.status(404).json({ message: 'Type not found' })
+    }
+    const city = _.first(await db.query(`SELECT * FROM City WHERE city_id=${cityId}`));
+    if (!city) {
+      return res.status(404).json({ message: 'City not found' })
+    }
+    const pet = _.first(await db.query(`SELECT * FROM PetType WHERE pet_id=${petId}`));
+    if (!pet) {
+      return res.status(404).json({ message: 'Pet not found' })
+    }
 
-
+    const query = ANNOUNCEMENT_QUERY_WITH_FAVORITES(userId);
+    const response = await db.query(`INSERT INTO Announcement(title, descr, createdAt, closedAt, status_id, user_id, type_id, city_id, pet_id) 
+    VALUES("${title}", "${descr}", "${moment(new Date()).format("YYYY-MM-DD")}", NULL, 1, ${userId}, ${typeId}, ${cityId}, ${petId})`);
+    const newAnnouncement = _.first(await db.query(`${query} WHERE Announcement.announcement_id=${response.insertId}`));
+    
     res
       .status(200)
-      .json()
+      .json(newAnnouncement)
 
   } catch (e) {
     console.log('*createAnnouncement service')
@@ -142,21 +188,116 @@ export const createAnnouncement = async(req, res, next) => {
   }
 }
 export const updateAnnouncement = async(req, res, next) => {
-  try {
+  const userId = req?.user?.user_id;
+  const announcementId = req.body?.announcement_id;
+  const title = req.body?.title;
+  const descr = req.body?.descr;
+  const typeId = req.body?.type_id;
+  const cityId = req.body?.city_id;
+  const petId = req.body?.pet_id;
 
+  if (!userId) {
+    return res.status(400).json({ message: "User id must be provided" })
+  }
+  if (!announcementId) {
+    return res.status(400).json({ message: "Announcement id must be provided" })
+  }
+  try {
+    const user = _.first(await db.query(`SELECT * FROM User WHERE user_id=${userId}`));
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' })
+    }
+    if (typeId) {
+      const type = _.first(await db.query(`SELECT * FROM Type WHERE type_id=${typeId}`));
+      if (!type) {
+        return res.status(404).json({ message: 'Type not found' })
+      }
+    }
+    
+    if (cityId) {
+      const city = _.first(await db.query(`SELECT * FROM City WHERE city_id=${cityId}`));
+      if (!city) {
+        return res.status(404).json({ message: 'City not found' })
+      }
+    }
+    
+    if (petId) {
+      const pet = _.first(await db.query(`SELECT * FROM PetType WHERE pet_id=${petId}`));
+      if (!pet) {
+        return res.status(404).json({ message: 'Pet not found' })
+      }
+    }
+
+    const announcement = _.first(await db.query(`SELECT * FROM Announcement WHERE announcement_id=${announcementId}`));
+    if (!announcement) {
+      return res.status(404).json({ message: 'Announcement not found' })
+    }
+    if (announcement.status_id === 2) {
+      return res.status(400).json({ message: "You can't update the announcement when it is closed" })
+    }
+
+
+    await db.query(`UPDATE Announcement SET 
+      title="${title ? title : announcement.title}",
+      descr="${descr ? descr : announcement.descr}",
+      type_id=${typeId ? typeId: announcement.type_id},
+      city_id=${cityId ? cityId: announcement.city_id},
+      pet_id=${petId ? petId: announcement.pet_id}
+      WHERE announcement_id=${announcementId}
+    `)
+
+
+    const query = ANNOUNCEMENT_QUERY_WITH_FAVORITES(userId);
+    const updatedAnn =  _.first(await db.query(`${query} WHERE Announcement.announcement_id=${announcement.announcement_id}`));
 
     res
       .status(200)
-      .json()
+      .json(updatedAnn)
 
   } catch (e) {
     console.log('*updateAnnouncement service')
     next(e)
   }
 }
+
+export const closeAnnouncement = async(req, res, next) => {
+  const userId = req?.user?.user_id;
+  const announcementId = req?.query?.announcement_id;
+
+  if (!userId) {
+    return res.status(400).json({ message: "User id must be provided" })
+  }
+  if (!announcementId) {
+    return res.status(400).json({ message: "Announcement id must be provided" })
+  }
+  try {
+    const announcement = _.first(await db.query(`SELECT * FROM Announcement WHERE announcement_id=${announcementId}`));
+    if (!announcement) {
+      return res.status(404).json({ message: 'Announcement not found' })
+    }
+    if (announcement.status_id === 2) {
+      return res.status(400).json({ message: "You can't close the announcement when it is closed" })
+    }
+    
+    let closedAt = moment(new Date()).format("YYYY-MM-DD");
+    await db.query(`UPDATE Announcement SET 
+      status_id=2,
+      closedAt="${closedAt}"
+      WHERE announcement_id=${announcementId}`)
+
+    res
+      .status(200)
+      .json("Announcement has been successfully closed!")
+
+  } catch (e) {
+    console.log('*closeAnnouncement service')
+    next(e)
+  }
+}
+
 export const deleteAnnouncement = async(req, res, next) => {
   try {
-
+    
     res
       .status(200)
       .json()
@@ -182,7 +323,7 @@ export const getAnnouncementsByUser = async(req, res, next) => {
       .json(announcements)
 
   } catch (e) {
-    console.log('*deleteAnnouncement service')
+    console.log('*getAnnouncementsByUser service')
     next(e)
   }
 }
@@ -270,12 +411,9 @@ export const getFavoriteAnnouncements = async(req, res, next) => {
     res
       .status(200)
       .json(announcements)
-    res
-      .status(200)
-      .json()
 
   } catch (e) {
-    console.log('*deleteAnnouncement service')
+    console.log('*getFavoriteAnnouncements service')
     next(e)
   }
 }

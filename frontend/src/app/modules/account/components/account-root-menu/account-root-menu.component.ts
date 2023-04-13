@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IUser } from 'src/app/models/models';
 import { ImageService } from 'src/app/services/image.service';
 import { UserService } from 'src/app/services/user.service';
-import { faSignInAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faPen, faSignInAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { ANNOUNCEMENTS_MENU_ITEMS, CHATS_MENU_ITEMS, PROFILE_MENU_ITEMS } from "../../models/menu-items";
 import { IMenuItem } from '../../models/menu-item.interface';
 import { AccountService } from '../../services/account.service';
@@ -17,7 +17,8 @@ import { AuthService } from 'src/app/modules/auth/services/auth.service';
 export class AccountRootMenuComponent implements OnInit {
   user!: IUser;
   noImageIcon = faUserCircle;
-  signinIcon = faSignInAlt;
+  arrowIcon = faChevronRight;
+  editIcon = faPen;
   menuItems = [
     {
       items: ANNOUNCEMENTS_MENU_ITEMS
@@ -45,7 +46,7 @@ export class AccountRootMenuComponent implements OnInit {
     )
 
     this.menuItems.forEach((parentItem) => {
-      const activeItem = parentItem.items.find((item) => this.router.url.includes(item.path))
+      const activeItem = parentItem.items.find((item) => item.path && this.router.url.includes(item.path))
       if(activeItem) {
         this.selectMenuItem(activeItem);
       }
@@ -65,6 +66,10 @@ export class AccountRootMenuComponent implements OnInit {
     this.auth.logout();
     this.auth.logoutClient();
     this.userService.unsetUser();
+  }
+
+  loadAvatar(): void {
+    
   }
 
 }

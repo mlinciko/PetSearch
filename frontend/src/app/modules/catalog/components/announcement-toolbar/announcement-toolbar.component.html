@@ -1,0 +1,14 @@
+<div class="announcement__toolbar-title">Toolbar actions</div>
+<div 
+  [ngClass]="{'disabled': disabled}"
+  class="announcement__toolbar-container"
+  >
+  <div class="announcement__toolbar-btn btn" (click)="edit()">
+    <fa-icon class="btn__icon" [icon]="editIcon"></fa-icon>
+    Edit
+  </div>
+  <div class="announcement__toolbar-btn btn close" (click)="close()">
+    <fa-icon class="btn__icon" [icon]="closeIcon"></fa-icon>
+    Close
+  </div>
+</div>

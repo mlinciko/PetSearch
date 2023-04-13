@@ -3,14 +3,17 @@
   margin: 0 auto;
 
   .registry-back {
-    color: #264ABD;
+    color: #2fc8e2;
     cursor:pointer;
+    display:block;
+    margin-bottom:30px;
   }
 
   .registry-image {
     display: block;
     margin: 0 auto;
-    padding-bottom:30px;
+    width: 200px;
+    padding-bottom: 100px;
   }
 
   .registry-title {

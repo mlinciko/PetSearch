@@ -11,6 +11,44 @@
     gap: 20px;
     margin-top: 20px;
   }
+  .user-data {
+    &__profile {
+      position:relative;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 10px;
+    }
+
+    &__image {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    &__face {
+      position: relative;
+    }
+
+    &__icon {
+      font-size: 80px;
+      color:#EDC3C5;
+    }
+
+    &__edit-icon {
+      position: absolute;
+      bottom: 0;
+      right: 1px;
+      padding: 3px;
+      font-size: 13px;
+      background-color: #2fc8e2;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
 }
 
 .profile-delete {

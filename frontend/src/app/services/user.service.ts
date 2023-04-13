@@ -100,8 +100,8 @@ export class UserService {
     this.user.next(null);
   }
 
-  getUserId(): number {
-    return this.user.value.user_id;
+  getUserId(): number | null {
+    return this.user.value? this.user.value.user_id : null;
   }
 
   onCatchError(err: HttpErrorResponse, message: string): Observable<never> {

@@ -1,57 +1,70 @@
-<div class="announcement-container" *ngIf="announcement">
-  <div class="announcement-data">
-    <div class="announcement-data__title">{{announcement.title}}</div>
-    <div class="announcement-data__image">
-      <img src="../../../../../assets/slider/img01.jpeg" alt="Image">
-      <div *ngIf="announcement.hasOwnProperty('is_favorite')" class="announcement-data__favorite">
-        <fa-icon 
-          *ngIf="announcement.is_favorite"  
-          class="announcement-data__favorite-red" 
-          matTooltip="Delete from favorites"
-          [icon]="favoriteIcon"
-          (click)="changeFavorite('delete', announcement)">
-        </fa-icon>
-        <fa-icon 
-          *ngIf="!announcement.is_favorite"  
-          class="announcement-data__favorite-grey" 
-          matTooltip="Add to favorites"
-          [icon]="favoriteIcon"
-          (click)="changeFavorite('add', announcement)">
-        </fa-icon>
+<div class="announcement-wrapper">
+  <ng-container *ngIf="announcement && currentUser === announcement.user_id">
+    <app-announcement-toolbar 
+      [disabled]="announcement.status_id === 2"
+      (onEdit)="editAnnouncement()"
+      (onClose)="closeAnnouncement()"
+    ></app-announcement-toolbar>
+  </ng-container>
+
+  <div class="announcement-container" *ngIf="announcement">
+    <div class="announcement-data">
+      <div class="announcement-data__title">{{announcement.title}}</div>
+      
+      <div class="announcement-data__image">
+        <img src="../../../../../assets/slider/img01.jpeg" alt="Image">
+        <div *ngIf="announcement.hasOwnProperty('is_favorite')" class="announcement-data__favorite">
+          <fa-icon 
+            *ngIf="announcement.is_favorite"  
+            class="announcement-data__favorite-red" 
+            matTooltip="Delete from favorites"
+            [icon]="favoriteIcon"
+            (click)="changeFavorite('delete', announcement)">
+          </fa-icon>
+          <fa-icon 
+            *ngIf="!announcement.is_favorite"  
+            class="announcement-data__favorite-grey" 
+            matTooltip="Add to favorites"
+            [icon]="favoriteIcon"
+            (click)="changeFavorite('add', announcement)">
+          </fa-icon>
+        </div>
+      </div>
+      <div class="announcement-data__descr-title">Description</div>
+      <div class="announcement-data__descr">{{announcement.descr}}</div>
+    </div>
+    <div class="announcement-right">
+      <div class="user">
+        <div class="user__data">
+          <ng-container *ngIf="announcement.user_image; else noImage">
+            <img class="user__image" [src]="getUserImage(announcement.user_image)" alt="image">
+          </ng-container>
+          <ng-template #noImage>
+            <fa-icon class="user__icon" [icon]="noImageIcon"></fa-icon>
+          </ng-template>
+          <div class="user__name">{{announcement.user_first_name}} {{announcement.user_last_name}}</div>
+        </div>
+        <dx-button
+          class="user__button"
+          stylingMode="contained"
+          text="Write to the creator"
+          type="default"
+          width="100%"
+          [disabled]="currentUser === announcement.user_id"
+          (onClick)="writeToCteator()"
+        >
+        </dx-button>
+      </div>
+      <div class="announcement-data__props props">
+        <div class="props__title">Properties</div>
+        <div class="props__item">Pet type: <span class="props__state">{{announcement.pet_type_name}}</span></div>
+        <div class="props__item">Announcement type: <span class="props__state">{{announcement.type_name}}</span></div>
+        <div class="props__item">Announcement status: <span class="props__state">{{announcement.status_name}}</span></div>
+        <div class="props__item">
+          Location: <span class="props__state props__city"><fa-icon [icon]="locationIcon"></fa-icon>{{announcement.city_name}}</span>
+        </div>
       </div>
     </div>
-    <div class="announcement-data__descr-title">Description</div>
-    <div class="announcement-data__descr">{{announcement.descr}}</div>
   </div>
-  <div class="announcement-right">
-    <div class="user">
-      <div class="user__data">
-        <ng-container *ngIf="announcement.user_image; else noImage">
-          <img class="user__image" [src]="getUserImage(announcement.user_image)" alt="image">
-        </ng-container>
-        <ng-template #noImage>
-          <fa-icon class="user__icon" [icon]="noImageIcon"></fa-icon>
-        </ng-template>
-        <div class="user__name">{{announcement.user_first_name}} {{announcement.user_last_name}}</div>
-      </div>
-      <dx-button
-        class="user__button"
-        stylingMode="contained"
-        text="Write to the creator"
-        type="default"
-        width="100%"
-        (onClick)="writeToCteator()"
-      >
-      </dx-button>
-    </div>
-    <div class="announcement-data__props props">
-      <div class="props__title">Properties</div>
-      <div class="props__item">Pet type: <span class="props__state">{{announcement.pet_type_name}}</span></div>
-      <div class="props__item">Announcement type: <span class="props__state">{{announcement.type_name}}</span></div>
-      <div class="props__item">Announcement status: <span class="props__state">{{announcement.status_name}}</span></div>
-      <div class="props__item">
-        Location: <span class="props__state props__city"><fa-icon [icon]="locationIcon"></fa-icon>{{announcement.city_name}}</span>
-      </div>
-    </div>
-  </div>
+  
 </div>

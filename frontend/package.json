@@ -24,6 +24,7 @@
     "@fontsource/urbanist": "^4.5.17",
     "@fortawesome/angular-fontawesome": "^0.10.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "devextreme": "^22.2.4",
     "devextreme-angular": "^22.2.4",

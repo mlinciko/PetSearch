@@ -1,10 +1,12 @@
+.announcement-wrapper {
+  width: 60%;
+  margin: 100px auto;
+}
 .announcement-container {
   display: flex;
   gap: 50px;
   align-items: flex-start;
   justify-content: space-around;
-  width: 60%;
-  margin: 100px auto;
 
   .announcement-data {
     width:50%;
@@ -47,13 +49,11 @@
   }
 
   .announcement-right {
-    margin-top:55px;
+    width: 30%;
   }
 
   .user {
-    background-color: #b3d1ef;
-    border-radius: 10px;
-    color: #fff;
+    border-bottom: 1px solid grey;
     padding:20px;
 
     &__data {
@@ -75,6 +75,7 @@
   .props {
     padding-top:20px;
     font-size: 18px;
+    font-family: 'Poppins', sans-serif;
     
     &__title {
       padding-bottom: 20px;
@@ -88,7 +89,7 @@
       color: #000;
     }
     &__city {
-      color:#84b8ed;
+      color:#2fc8e2;
     }
   }
 }

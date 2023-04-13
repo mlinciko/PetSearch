@@ -1,4 +1,13 @@
 <ng-container *ngIf="!loading">
+  <dx-button
+    class="add-button"
+    stylingMode="contained"
+    text="+ Create an announcement"
+    type="default"
+    width="220px"
+    (onClick)="createAnnouncement()"
+    >
+  </dx-button>
   <ng-container *ngIf="announcements.length > 0; else notFound">
     <div class="announcements-container">
       <ng-container *ngFor="let item of announcements">

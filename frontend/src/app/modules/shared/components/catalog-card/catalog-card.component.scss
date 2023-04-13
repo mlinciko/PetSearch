@@ -1,8 +1,9 @@
 .announcement {
   width: 250px;
+  min-height: 315px;
   border-radius: 40px;
   box-shadow: rgba(0,0,0,0.7);
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+  background-color: #fff;
   padding: 10px 0 20px 0;
 
   .announcement-image {
@@ -29,6 +30,15 @@
     &__favorite-grey {
       color:#bababa;
     }
+    &__closed {
+      position: absolute;
+      left: 30px;
+      bottom: 20px;
+      color: red;
+      background-color: rgba(255,255,255,0.8);
+      padding: 5px;
+      border-radius: 5px;
+    }
   }
 
   .announcement-title {
@@ -53,6 +63,6 @@
 
   .announcement-city {
     padding-left: 20px;
-    color: #84b8ed;
+    color: #2fc8e2;
   }
 }

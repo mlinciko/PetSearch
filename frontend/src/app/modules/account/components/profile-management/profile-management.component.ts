@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../../services/account.service';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { Utils } from 'src/app/utils/ulits.class';
-import { TRegistryData, initRegistryFormData } from 'src/app/modules/auth/models/models';
 import { IDxFormItems, IUser } from 'src/app/models/models';
 import { UserService } from 'src/app/services/user.service';
 import * as _ from 'lodash';
 import notify from 'devextreme/ui/notify';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { confirm } from "devextreme/ui/dialog";
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-profile-management',
@@ -19,12 +17,13 @@ import { confirm } from "devextreme/ui/dialog";
 export class ProfileManagementComponent implements OnInit {
   isFormEditing: boolean = false;
   editIcon = faPen;
+  noImageIcon = faUserCircle;
 
   formItems!: IDxFormItems;
   formData!: IUser;
   constructor(
     private userService: UserService,
-    private router: Router,
+    private imageService: ImageService,
     private auth: AuthService,
   ) { }
 
@@ -140,6 +139,14 @@ export class ProfileManagementComponent implements OnInit {
         this.deleteProfile();
       }
     });
+  }
+
+  getUserImage(imagePath: string): string {
+    return this.imageService.getFullImagePath(imagePath);
+  }
+
+  loadAvatar(): void {
+    
   }
 
 }

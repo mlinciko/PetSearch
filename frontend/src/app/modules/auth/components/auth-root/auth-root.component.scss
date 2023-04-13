@@ -3,15 +3,17 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: #EAE9E5;
 }
 
 .left-container {
   width: 60%;
-  border-right: 3px solid #1B4571;
+  background-color: #262033;
 }
 
 .right-container {
   width: 40%;
+  margin-top: -100px;
 }
 
 .slider-container {
@@ -26,7 +28,7 @@
   }
 
   .slider-title {
-    color: #1B4571;
+    color: #2fc8e2;
     font-weight: 800;
     font-size: 24px;
     width: 80%;

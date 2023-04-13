@@ -1,28 +1,53 @@
 .menu-container {
+  font-family: 'Poppins', sans-serif;
   .menu__user-data {
+    border-bottom:1px solid grey;
     padding: 10px;
-    background-color: #b3d1ef;
-    border-radius: 10px;
-    color: #fff;
     margin-bottom:20px;
 
     .user-data {
       &__profile {
+        position:relative;
         display: flex;
         justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 10px;
+      }
+
+      &__image {
+        width: 130px;
+        height: 130px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      &__face {
+        position: relative;
       }
 
       &__icon {
-        font-size: 60px;
+        font-size: 80px;
+        color: #EDC3C5;
       }
 
-      &__logout-icon {
-        cursor:pointer;
+      &__edit-icon {
+        position: absolute;
+        bottom: 0;
+        right: 1px;
+        padding: 3px;
+        font-size: 13px;
+        background-color: #2fc8e2;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
       }
 
       &__name {
-        padding-top: 20px;
-        font-size: 16px;
+        padding-top: 10px;
+        font-weight: bold;
+        font-size: 13px;
+        text-align: center;
       }
     }
   }
@@ -30,19 +55,29 @@
   .menu__blocks {
     .menu__block {
       padding: 10px;
-      background-color: #b3d1ef;
-      border-radius: 10px;
-      color: #fff;
-      font-size: 16px;
-      margin-bottom:20px;
+      font-size: 15px;
+      margin-bottom:10px;
+      border-bottom: 1px solid grey;
 
-      .menu__item {
-        cursor: pointer;
-        padding-bottom:5px;
+
+      .menu {
+        &__item {
+          cursor: pointer;
+          padding-bottom:10px;
+          display: flex;
+          justify-content: space-between;
+        }
+        &__item-logout {
+          color: #F85556;
+        }
+        &__item-icon {
+          padding-right:10px;
+        }
       }
+      
 
       .menu__item-active {
-        color:#1B4571;
+        color:#2fc8e2;
       }
     }
   }

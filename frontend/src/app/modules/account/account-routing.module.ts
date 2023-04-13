@@ -12,7 +12,7 @@ const routes: Routes = [
     component: AccountRootComponent,
     children: [
       {
-        path: "profile-management",
+        path: "profile",
         component: ProfileManagementComponent,
       },
       {

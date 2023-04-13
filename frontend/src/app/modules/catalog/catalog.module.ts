@@ -8,6 +8,9 @@ import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { AnnouncementComponent } from './components/announcement/announcement.component';
 import { DevExtremeModule } from '../dev-extreme/dev-extreme.module';
+import { AddAnnouncementComponent } from './components/add-announcement/add-announcement.component';
+import { AnnouncementToolbarComponent } from './components/announcement-toolbar/announcement-toolbar.component';
+import { EditAnnouncementComponent } from './components/edit-announcement/edit-announcement.component';
 
 
 
@@ -15,6 +18,9 @@ import { DevExtremeModule } from '../dev-extreme/dev-extreme.module';
   declarations: [
     CatalogComponent,
     AnnouncementComponent,
+    AddAnnouncementComponent,
+    AnnouncementToolbarComponent,
+    EditAnnouncementComponent,
   ],
   imports: [
     CommonModule,

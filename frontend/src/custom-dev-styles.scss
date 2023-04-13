@@ -1,11 +1,17 @@
 .dx-gallery-indicator-item-active, .dx-gallery-indicator-item-selected {
-  background: #1B4571; 
+  background: #2fc8e2; 
+}
+.dx-widget input, .dx-widget textarea {
+  font-family: 'Poppins', sans-serif;
 }
 .dx-gallery-indicator-item {
-  background: #1B4571; 
+  background: #2fc8e2; 
 }
 .dx-button-mode-contained.dx-button-default {
-  background-color: #1B4571;
+  background-color: #2fc8e2;
+  border-radius: 20px;
+}
+.dx-button-mode-contained.dx-button-danger {
   border-radius: 20px;
 }
 .dx-button-mode-contained.dx-button-normal {
@@ -14,7 +20,7 @@
 .dx-button-mode-contained.dx-button-default.dx-state-active,
 .dx-button-mode-contained.dx-button-default.dx-state-hover,
 .dx-button-mode-contained.dx-button-default.dx-state-focused {
-  background-color: #1B4571;
+  background-color: #2fc8e2;
 }
 
 .dx-htmleditor {
@@ -62,41 +68,43 @@
 
 .dx-editor-outlined.dx-state-focused.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label-after,
 .dx-editor-outlined.dx-state-hover.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label-after {
-  border-color:#1B4571;
+  border-color:#2fc8e2;
 }
 
 .dx-editor-outlined.dx-state-focused.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label
 .dx-editor-outlined.dx-state-hover.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label {
-  border-color:#1B4571;
+  border-color:#2fc8e2;
 }
 
 .dx-editor-outlined.dx-state-focused.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label-after,
 .dx-editor-outlined.dx-state-hover.dx-texteditor-with-floating-label.dx-texteditor-empty .dx-texteditor-label .dx-label-after {
-  border-color:#1B4571;
+  border-color:#2fc8e2;
 }
 
 .dx-texteditor.dx-state-focused .dx-texteditor-label {
-  color:#1B4571;
+  color:#2fc8e2;
 }
 .dx-texteditor.dx-state-hover .dx-texteditor-label,
 .dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused.dx-state-hover .dx-texteditor-label .dx-label span{
-  color:#1B4571;
+  color:#2fc8e2;
 }
 
 .dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused .dx-texteditor-label .dx-label,
 .dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-hover .dx-texteditor-label .dx-label,
 .dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused.dx-state-hover .dx-texteditor-label .dx-label,
 .dx-editor-outlined.dx-texteditor-with-floating-label.dx-texteditor-empty.dx-state-hover .dx-texteditor-label .dx-label {
-  border-bottom-color:#1B4571;
-  border-top-color:#1B4571;
+  border-bottom-color:#2fc8e2;
+  border-top-color:#2fc8e2;
 }
 
 .dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused .dx-texteditor-label .dx-label-before,
 .dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-hover .dx-texteditor-label .dx-label-before,
 .dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused.dx-state-hover .dx-texteditor-label .dx-label-before,
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused .dx-texteditor-label .dx-label-after,
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused.dx-state-hover .dx-texteditor-label .dx-label-after,
 .dx-editor-outlined.dx-texteditor-with-floating-label.dx-texteditor-empty.dx-state-hover .dx-texteditor-label .dx-label-before,
 .dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-hover .dx-texteditor-label .dx-label-after {
-  border-color:#1B4571;
+  border-color:#2fc8e2;
 }
 
 .dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused.dx-invalid .dx-texteditor-label .dx-label-after {
@@ -109,14 +117,14 @@
 }
 
 .dx-checkbox-checked .dx-checkbox-icon {
-  color:#1B4571;
+  color:#2fc8e2;
 }
 
 .dx-checkbox-checked.dx-state-focused .dx-checkbox-icon,
 .dx-checkbox-checked.dx-state-hover .dx-checkbox-icon,
 .dx-checkbox.dx-state-hover .dx-checkbox-icon,
 .dx-checkbox.dx-state-focused .dx-checkbox-icon   {
-  border: 2px solid #1B4571;
+  border: 2px solid #2fc8e2;
   border-radius:5px;
 }
 
@@ -138,4 +146,27 @@
 
 .dx-state-disabled.dx-widget {
   opacity: 0.8;
+}
+
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-textarea .dx-texteditor-input-container, 
+.dx-editor-outlined.dx-texteditor-with-label.dx-textarea .dx-texteditor-input-container {
+  padding-top:0;
+}
+
+.dx-textarea {
+  height: 100px;
+}
+
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-texteditor-empty,
+.dx-editor-outlined.dx-texteditor-with-floating-label {
+  border-radius: 12px;
+}
+
+.dx-dropdowneditor-icon {
+  border-radius:12px;
+}
+
+.dx-editor-outlined.dx-texteditor-with-floating-label.dx-textarea .dx-texteditor-input-container .dx-texteditor-input, 
+.dx-editor-outlined.dx-texteditor-with-label.dx-textarea .dx-texteditor-input-container .dx-texteditor-input {
+  padding-top:10px;
 }

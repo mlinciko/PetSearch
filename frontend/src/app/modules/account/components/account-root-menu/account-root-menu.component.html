@@ -1,33 +1,45 @@
 <div class="menu-container">
   <div *ngIf="user" class="menu__user-data user-data">
     <div class="user-data__profile">
-      <ng-container *ngIf="user.image; else noImage">
-        <img class="user-data__image" [src]="getUserImage(user.image)" alt="image">
-      </ng-container>
-      <ng-template #noImage>
-        <fa-icon class="user-data__icon" [icon]="noImageIcon"></fa-icon>
-      </ng-template>
-      <fa-icon 
-        class="user-data__logout-icon" 
-        [icon]="signinIcon" 
-        matTooltip="Logout"
-        (click)="logoutUser()">
-      </fa-icon>
-    </div>
-    <div class="user-data__name">
-      {{user.first_name}} {{user.last_name}}
+      <div class="user-data__face">
+        <ng-container *ngIf="user.image; else noImage">
+          <img class="user-data__image" [src]="getUserImage(user.image)" alt="image">
+        </ng-container>
+        <ng-template #noImage>
+          <fa-icon class="user-data__icon" [icon]="noImageIcon"></fa-icon>
+        </ng-template>
+        <fa-icon class="user-data__edit-icon" [icon]="editIcon" (click)="loadAvatar()"></fa-icon>
+      </div>
+      <div class="user-data__name">
+        {{user.first_name}} {{user.last_name}}
+      </div>
     </div>
   </div>
   <div class="menu__blocks">
     <div *ngFor="let block of menuItems" class="menu__block">
-      <div 
-        *ngFor="let item of block.items" 
-        class="menu__item" 
-        [routerLink]="[item.path]"
-        routerLinkActive="menu__item-active"
-        (click)="selectMenuItem(item)">
-        {{item.title}}
-      </div>
+      <ng-container *ngFor="let item of block.items" >
+        <div
+          *ngIf="!item.template"
+          class="menu__item" 
+          [routerLink]="[item.path]"
+          routerLinkActive="menu__item-active"
+          (click)="selectMenuItem(item)">
+          <span>
+            <fa-icon class="menu__item-icon" [icon]="item.icon"></fa-icon>
+            {{item.title}}
+          </span>
+          <fa-icon class="menu__item-arrow" [icon]="arrowIcon"></fa-icon>
+        </div>
+        <div
+          *ngIf="item.template==='logout'"
+          class="menu__item  menu__item-logout" 
+          (click)="logoutUser()">
+          <span>
+            <fa-icon class="menu__item-icon" [icon]="item.icon"></fa-icon>
+            {{item.title}}
+          </span>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

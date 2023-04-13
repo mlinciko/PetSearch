@@ -29,3 +29,13 @@ export interface IChangePass {
   new_password: string,
   user_id: number,
 }
+
+export interface IDictioneryParam {
+  [key: string]: string,
+}
+
+export const dictionaryParams: IDictioneryParam = {
+  city: "city_id",
+  pet: "pet_id",
+  type: "type_id",
+}

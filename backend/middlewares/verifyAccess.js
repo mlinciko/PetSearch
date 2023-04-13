@@ -10,7 +10,6 @@ export const verifyAccess = async (req, res, next) => {
 
   try {
     const decoded = await verifyToken(accessToken, ACCESS_TOKEN_SECRET)
-    //console.log('*Decoded access token', decoded)
 
     if (!decoded) {
       return res.status(403).json({ message: 'Invalid access token' })

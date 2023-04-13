@@ -8,7 +8,8 @@ import {
   getAnnouncementsByUser,
   addAnnouncementToFavorites,
   deleteAnnouncementFromFavorites,
-  getFavoriteAnnouncements
+  getFavoriteAnnouncements,
+  closeAnnouncement
 } from '../services/announcement.service.js';
 import {
   verifyAccess,
@@ -27,5 +28,6 @@ router
   .get('/favorites', verifyAccess, getFavoriteAnnouncements)
   .post('/add-to-favorites', verifyAccess, addAnnouncementToFavorites)
   .delete('/delete-from-favorites', verifyAccess, deleteAnnouncementFromFavorites)
+  .get('/close', verifyAccess, closeAnnouncement)
 
 export default router

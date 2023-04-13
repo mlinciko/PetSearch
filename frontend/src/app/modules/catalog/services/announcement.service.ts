@@ -4,6 +4,8 @@ import { environment } from 'src/environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
 import { IAnnouncement } from '../models/announcement.interface';
 import notify from 'devextreme/ui/notify';
+import { ICreateAnnouncement } from '../models/create-announcement.interface';
+import { IUpdateAnnouncement } from '../models/update-announcement.interface';
 
 
 @Injectable()
@@ -72,11 +74,49 @@ export class AnnouncementService {
     )
   }
 
+  createAnnouncement(payload: ICreateAnnouncement): Observable<IAnnouncement> {
+    return this.http.post<IAnnouncement>(`${this.restUrl}`, payload)
+    .pipe(
+      catchError((err) => 
+        this.onCatchError(
+          err, err.error.message 
+          ? err.error.message
+          : "Error occured while creating an announcement"
+        )
+      )
+    )
+  }
+
+  updateAnnouncement(payload: IUpdateAnnouncement): Observable<IAnnouncement> {
+    return this.http.patch<IAnnouncement>(`${this.restUrl}`, payload)
+    .pipe(
+      catchError((err) => 
+        this.onCatchError(
+          err, err.error.message 
+          ? err.error.message
+          : "Error occured while updating an announcement"
+        )
+      )
+    )
+  }
+
+  closeAnnouncement(id: number): Observable<string> {
+    return this.http.get<string>(`${this.restUrl}close/?announcement_id=${id}`)
+    .pipe(
+      catchError((err) => 
+        this.onCatchError(
+          err, err.error.message 
+          ? err.error.message
+          : "Error occured while closing an announcement"
+        )
+      )
+    )
+  }
+
   onCatchError(err: HttpErrorResponse, message: string): Observable<never> {
     if (err.status !== 403 && err.status !== 401) {
       notify({ message, type: "error", width: "auto"});
     }
     return throwError(err);
   }
-
 }

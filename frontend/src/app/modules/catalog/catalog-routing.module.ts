@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { announcementTypes } from './models/announcement-types';
 import { AnnouncementComponent } from './components/announcement/announcement.component';
+import { AddAnnouncementComponent } from './components/add-announcement/add-announcement.component';
+import { EditAnnouncementComponent } from './components/edit-announcement/edit-announcement.component';
 
 const routes: Routes = [
   {
@@ -26,7 +28,15 @@ const routes: Routes = [
       {
         path: "view/:id",
         component: AnnouncementComponent,
-      }
+      },
+      {
+        path: "edit/:id",
+        component: EditAnnouncementComponent,
+      },
+      {
+        path: "add",
+        component: AddAnnouncementComponent,
+      },
     ]
   },
   { path: "", pathMatch: "full", redirectTo: "all"},

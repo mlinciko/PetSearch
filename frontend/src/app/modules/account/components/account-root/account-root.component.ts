@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 
 @Component({
@@ -6,13 +6,9 @@ import { AccountService } from '../../services/account.service';
   templateUrl: './account-root.component.html',
   styleUrls: ['./account-root.component.scss']
 })
-export class AccountRootComponent implements OnInit {
+export class AccountRootComponent {
 
   constructor(
     protected account: AccountService,
   ) { }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -33,6 +33,9 @@ export abstract class BaseCatalogComponent {
     const userId = this.userService.getUserId();
     const announcementId = e.item.announcement_id;
 
+    if (!userId) {
+      return;
+    }
     const refresh = () => this.loadAnnouncements();
     if (e.action === "add") {
       this.announcement.addAnnouncementToFavorites(userId, announcementId)
