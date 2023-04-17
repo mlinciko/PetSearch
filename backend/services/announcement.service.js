@@ -1,6 +1,8 @@
 import { db } from "../index.js";
 import _ from 'lodash';
 import moment from 'moment';
+import path from 'path';
+import fs from 'fs';
 
 const ANNOUNCEMENT_QUERY = () => {
   return `
@@ -60,6 +62,8 @@ export const getAllAnnouncements = async(req, res, next) => {
   const cityId = req.query?.city_id;
   const petId = req.query?.pet_id;
 
+  const search = req.query?.search;
+
   try {
     let query = "";
     if (tokenUserId) {
@@ -87,8 +91,18 @@ export const getAllAnnouncements = async(req, res, next) => {
     if (query.substr(query.length - 3) === "AND") {
       query = `${query.slice(0, -3)}`;
     }
-    const announcements = await db.query(`${query} ORDER BY createdAt DESC`);
+    let announcements = await db.query(`${query} ORDER BY createdAt DESC`);
+    await addImages(announcements);
 
+    if (search) {
+      announcements = announcements.filter(
+        (ann) => {
+          return ann.title.includes(search) 
+          || ann.descr.includes(search) 
+          || ann.city_name.includes(search)
+        }
+      )
+    }
 
     res
       .status(200)
@@ -119,6 +133,7 @@ export const getAnnouncementById = async(req, res, next) => {
     if (!announcement) {
       return res.status(404).json({ message: 'Announcement not found' })
     }
+    await addImages([announcement]);
 
     res
       .status(200)
@@ -177,7 +192,8 @@ export const createAnnouncement = async(req, res, next) => {
     const response = await db.query(`INSERT INTO Announcement(title, descr, createdAt, closedAt, status_id, user_id, type_id, city_id, pet_id) 
     VALUES("${title}", "${descr}", "${moment(new Date()).format("YYYY-MM-DD")}", NULL, 1, ${userId}, ${typeId}, ${cityId}, ${petId})`);
     const newAnnouncement = _.first(await db.query(`${query} WHERE Announcement.announcement_id=${response.insertId}`));
-    
+    await addImages([newAnnouncement]);
+
     res
       .status(200)
       .json(newAnnouncement)
@@ -249,6 +265,7 @@ export const updateAnnouncement = async(req, res, next) => {
 
     const query = ANNOUNCEMENT_QUERY_WITH_FAVORITES(userId);
     const updatedAnn =  _.first(await db.query(`${query} WHERE Announcement.announcement_id=${announcement.announcement_id}`));
+    await addImages([updatedAnn]);
 
     res
       .status(200)
@@ -317,6 +334,7 @@ export const getAnnouncementsByUser = async(req, res, next) => {
   try {
     const query = `${ANNOUNCEMENT_QUERY_WITH_FAVORITES(userId)} WHERE Announcement.user_id=${userId} ORDER BY createdAt DESC`;
     const announcements = await db.query(query);
+    await addImages(announcements);
 
     res
       .status(200)
@@ -407,6 +425,7 @@ export const getFavoriteAnnouncements = async(req, res, next) => {
   try {
     const query = `${ANNOUNCEMENT_QUERY_WITH_FAVORITES(userId, "INNER")} ORDER BY createdAt DESC`;
     const announcements = await db.query(query);
+    await addImages(announcements);
 
     res
       .status(200)
@@ -415,5 +434,62 @@ export const getFavoriteAnnouncements = async(req, res, next) => {
   } catch (e) {
     console.log('*getFavoriteAnnouncements service')
     next(e)
+  }
+}
+
+export const uploadImage = async(req, res, next) => {
+  const announcementId = req.body?.announcement_id;
+  const files = req.files;
+
+  if (!files) {
+    return res.status(400).json({ message: "File must be provided" })
+  }
+  try {
+    const announcement = _.first(await db.query(`SELECT * FROM Announcement WHERE announcement_id=${announcementId}`));
+    if (!announcement) {
+      return res.status(404).json({ message: 'Announcement not found' })
+    }
+
+    const __dirname = path.resolve();
+
+    const images = await db.query(`SELECT path FROM AnnouncementImages WHERE announcement_id=${announcementId}`)
+    const imageNames = images.map((item) => item.path)
+    if (imageNames.length) {
+      imageNames.forEach(
+        (name) => {
+          const filepath = `${__dirname}/media/announcements/${name}`
+          fs.unlinkSync(filepath);
+        }
+      )
+    }
+    await db.query(`DELETE FROM AnnouncementImages WHERE announcement_id=${announcementId}`)
+
+    Object.keys(files).forEach(async key => {
+      const filepath = path.join(__dirname, 'media/announcements', `${new Date().getTime()}_${files[key].name}`)
+      files[key].mv(filepath, (err) => {
+        if (err) {
+          return res
+                  .status(500)
+                  .json("Internal server error")
+        }
+      })
+
+      await db.query(`INSERT INTO AnnouncementImages(announcement_id, path) VALUES(${announcementId}, "${_.last(filepath.split("/"))}")`);
+    })
+    res
+      .status(200)
+      .json("Images have been uploaded successfully!")
+
+  } catch (e) {
+    console.log('*uploadeImage service')
+    next(e)
+  }
+}
+
+async function addImages(announcements) {
+  for (const announcement of announcements) {
+    const images = await db.query(`SELECT path FROM AnnouncementImages 
+      WHERE announcement_id=${announcement.announcement_id}`);
+    announcement.images = images.map((image) => image.path);
   }
 }

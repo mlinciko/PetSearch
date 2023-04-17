@@ -1,0 +1,15 @@
+<div class="upload-container">
+  <dx-form #form width="100%" [(formData)]='formData' [items]="formItems">
+  </dx-form>
+  <dx-file-uploader
+        dialogTrigger=".dropzone-external"
+        dropZone=".dropzone-external"
+        #fileUploader
+        uploadMode="useForm"
+        [visible]="false"
+        [multiple]="false"
+        [allowedFileExtensions]="allowedTypes"
+        [maxFileSize]="1000000"
+        (onValueChanged)="onValueChanged($event)"
+    ></dx-file-uploader>
+</div>

@@ -12,7 +12,27 @@
       <div class="announcement-data__title">{{announcement.title}}</div>
       
       <div class="announcement-data__image">
-        <img src="../../../../../assets/slider/img01.jpeg" alt="Image">
+        <ng-container *ngIf="announcement.images.length; else noAnnImage">
+          <dx-gallery
+              [dataSource]="sliderItems"
+              height="500px"
+              width="100%"
+              [showIndicator]="true"
+              [animationEnabled]="false"
+              [showNavButtons]="true">
+              <div *dxTemplate="let sliderItem of 'item'">
+                <div class="slider-container">
+                  <img src="{{ sliderItem.image }}" />
+                  <div class="slider-title">{{sliderItem.title}}</div>
+                </div>
+              </div>
+            </dx-gallery>
+        </ng-container>
+        <ng-template #noAnnImage>
+          <div class="announcement-data__no-image">
+            <fa-icon [icon]="pawIcon"></fa-icon>
+          </div>
+        </ng-template>
         <div *ngIf="announcement.hasOwnProperty('is_favorite')" class="announcement-data__favorite">
           <fa-icon 
             *ngIf="announcement.is_favorite"  
@@ -37,7 +57,7 @@
       <div class="user">
         <div class="user__data">
           <ng-container *ngIf="announcement.user_image; else noImage">
-            <img class="user__image" [src]="getUserImage(announcement.user_image)" alt="image">
+            <img class="user__image" [src]="getImage(announcement.user_image, 'users')" alt="image">
           </ng-container>
           <ng-template #noImage>
             <fa-icon class="user__icon" [icon]="noImageIcon"></fa-icon>

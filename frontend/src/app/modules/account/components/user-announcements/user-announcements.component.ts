@@ -15,11 +15,10 @@ import { UserService } from 'src/app/services/user.service';
 export class UserAnnouncementsComponent extends BaseCatalogComponent implements OnInit {
   constructor(
     protected override announcement: AnnouncementService,
-    protected override imageService: ImageService,
     protected override userService: UserService,
     private router: Router,
   ) {
-    super(announcement, imageService, userService);
+    super(announcement, userService);
   }
    ngOnInit(): void {
     this.loadAnnouncements();

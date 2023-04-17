@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnnouncementService } from '../../services/announcement.service';
 import { IAnnouncement } from '../../models/announcement.interface';
-import { faHeart, faLocationArrow, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faLocationArrow, faPaw, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { ImageService } from 'src/app/services/image.service';
 import { UserService } from 'src/app/services/user.service';
 import { confirm } from "devextreme/ui/dialog";
@@ -18,6 +18,9 @@ export class AnnouncementComponent implements OnInit {
   favoriteIcon = faHeart;
   locationIcon = faLocationArrow;
   noImageIcon = faUserCircle;
+  pawIcon = faPaw;
+
+  sliderItems: {image: string}[] = [];
 
   currentUser!: number;
   constructor(
@@ -45,6 +48,7 @@ export class AnnouncementComponent implements OnInit {
       (res) => {
         console.log(res);
         this.announcement = res;
+        this.createSliderItems(this.announcement.images);
       }
     )
   }
@@ -55,8 +59,8 @@ export class AnnouncementComponent implements OnInit {
       this.currentUser = id;
   }
 
-  getUserImage(imagePath: string): string {
-    return this.imageService.getFullImagePath(imagePath);
+  getImage(imagePath: string, type: "announcements" | "users"): string {
+    return this.imageService.getFullImagePath(imagePath, type);
   }
 
   writeToCteator(): void {
@@ -100,6 +104,21 @@ export class AnnouncementComponent implements OnInit {
         }
       }
     });
+  }
+
+  createSliderItems(images: string[]): void {
+    if (!images.length) {
+      return;
+    }
+    images.forEach(
+      (image) => {
+        return this.sliderItems.push(
+          {
+            image: this.getImage(image, "announcements"),
+          }
+        );
+      }
+    )
   }
 
 }

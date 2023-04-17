@@ -1,14 +1,19 @@
 <div class="announcement-container">
-  <dx-form #form width="600px" [(formData)]='formData' [items]="formItems">
-  </dx-form>
-
-  <dx-button
-    class="create-button"
-    stylingMode="contained"
-    text="Update"
-    type="default"
-    width="200px"
-    (onClick)="submitForm()"
-  >
-  </dx-button>
+  <div class="announcement-container-right">
+    <app-upload-ann-images #uploader [_files]="files"></app-upload-ann-images>
+  </div>
+  <div class="announcement-container-left">
+    <dx-form #form width="600px" [(formData)]='formData' [items]="formItems">
+    </dx-form>
+  
+    <dx-button
+      class="create-button"
+      stylingMode="contained"
+      text="Update"
+      type="default"
+      width="200px"
+      (onClick)="submitForm()"
+    >
+    </dx-button>
+  </div>
 </div>

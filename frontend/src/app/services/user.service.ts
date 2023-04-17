@@ -88,6 +88,26 @@ export class UserService {
     )
   }
 
+  uploadCurrentUserAvatar(file: File): Observable<any> {
+    const payload = new FormData();
+    payload.append("file", file);
+    return this.http.post(`${this.restUrl}/upload-image`, payload)
+    .pipe(
+      catchError((err) => 
+        this.onCatchError(
+          err, err.error.message 
+          ? err.error.message
+          : "Error occured while uploading image"
+      )),
+      map(
+        (res) => {
+          this.getCurrentUser();
+          return res;
+        }
+      )
+    )
+  }
+
   isUserAuthrized(): boolean {
     return !!this.user.value;
   }

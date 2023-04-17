@@ -21,6 +21,8 @@ export class ProfileManagementComponent implements OnInit {
 
   formItems!: IDxFormItems;
   formData!: IUser;
+
+  avatarDialog: boolean = false;
   constructor(
     private userService: UserService,
     private imageService: ImageService,
@@ -142,11 +144,15 @@ export class ProfileManagementComponent implements OnInit {
   }
 
   getUserImage(imagePath: string): string {
-    return this.imageService.getFullImagePath(imagePath);
+    return this.imageService.getFullImagePath(imagePath, "users");
   }
 
   loadAvatar(): void {
-    
+    this.avatarDialog = true;
+  }
+
+  closeLoadAvatar(): void {
+    this.avatarDialog = false;
   }
 
 }

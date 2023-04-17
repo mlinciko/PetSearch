@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { UserAnnouncementsComponent } from './components/user-announcements/user-announcements.component';
 import { UserFavoritesComponent } from './components/user-favorites/user-favorites.component';
 import { DevExtremeModule } from '../dev-extreme/dev-extreme.module';
+import { UploadAvatarDialogComponent } from './components/upload-avatar-dialog/upload-avatar-dialog.component';
 
 
 
@@ -21,7 +22,8 @@ import { DevExtremeModule } from '../dev-extreme/dev-extreme.module';
     ProfileManagementComponent,
     ChangePasswordComponent,
     UserAnnouncementsComponent,
-    UserFavoritesComponent
+    UserFavoritesComponent,
+    UploadAvatarDialogComponent
   ],
   imports: [
     CommonModule,

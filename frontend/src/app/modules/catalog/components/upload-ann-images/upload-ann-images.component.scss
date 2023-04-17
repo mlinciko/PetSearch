@@ -1,0 +1,48 @@
+:host {
+  ::ng-deep {
+    .dropzone-external input {
+      background-image: url("../../../../../assets/icons/clip.svg");
+      background-repeat: no-repeat;
+      background-size: 25px 25px;
+      background-position: center right;
+      margin-right: 10px;
+    }
+
+    .dx-form-group-with-caption > .dx-form-group-content {
+      padding-top: 25px;
+    }
+  }
+}
+
+.upload-images {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: minmax(100px, 100px);
+  gap: 10px;
+
+  .upload-image {
+    position:relative;
+    margin-top:20px;
+    img {
+      display: block;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+
+    img:hover {
+      opacity: 0.3;
+    }
+
+    &__icon {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: rgba(255,255,255,0.6);
+      padding: 4px;
+      border-radius: 50%;
+      font-size: 16px;
+      cursor:pointer;
+    }
+  }
+}

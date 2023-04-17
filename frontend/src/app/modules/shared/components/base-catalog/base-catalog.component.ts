@@ -19,15 +19,10 @@ export abstract class BaseCatalogComponent {
 
   constructor(
     protected announcement: AnnouncementService,
-    protected imageService: ImageService,
     protected userService: UserService,
   ) { }
 
   abstract loadAnnouncements(): void;
-
-  getImage(imagePath: string): string {
-    return this.imageService.getFullImagePath(imagePath);
-  }
 
   changeFavorite(e: IFavoriteChangedEvent): void {
     const userId = this.userService.getUserId();

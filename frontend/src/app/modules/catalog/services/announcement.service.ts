@@ -113,6 +113,10 @@ export class AnnouncementService {
     )
   }
 
+  uploadImages(payload: FormData): Observable<string> {
+    return this.http.post<string>(`${this.restUrl}upload-image`, payload)
+  }
+
   onCatchError(err: HttpErrorResponse, message: string): Observable<never> {
     if (err.status !== 403 && err.status !== 401) {
       notify({ message, type: "error", width: "auto"});

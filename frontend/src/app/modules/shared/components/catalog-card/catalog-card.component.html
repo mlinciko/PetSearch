@@ -1,6 +1,13 @@
 <div class="announcement">
   <div class="announcement-image">
-    <img src="../../../../../assets/slider/img01.jpeg" alt="Image">
+    <div *ngIf="announcement.images[0]; else noImageTemplate" class="announcement-image">
+      <img [src]="getImage(announcement.images[0])" alt="Image">
+    </div>
+    <ng-template #noImageTemplate>
+      <div class="announcement-image__no-image-icon">
+        <fa-icon [icon]="pawIcon"></fa-icon>
+      </div>
+    </ng-template>
     <div *ngIf="announcement.status_id===2" class="announcement-image__closed">closed</div>
     <div *ngIf="announcement.hasOwnProperty('is_favorite')" class="announcement-image__favorite">
       <fa-icon 
@@ -19,9 +26,6 @@
       </fa-icon>
     </div>
   </div>
-  <!-- <div class="announcement-image">
-    <img [src]="getImage(item)" alt="Image">
-  </div> -->
   <div class="announcement-title" (click)="goToAnnouncement(announcement)">{{announcement.title}}</div>
   <div class="announcement-date-pet">
     <div class="announcement-date">{{announcement.createdAt | date: 'mediumDate' }}</div>

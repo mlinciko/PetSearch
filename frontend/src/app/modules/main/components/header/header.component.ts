@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   }
 
   getUserImage(imagePath: string): string {
-    return this.imageService.getFullImagePath(imagePath);
+    return this.imageService.getFullImagePath(imagePath, "users");
   }
 
 }

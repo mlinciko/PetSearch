@@ -1,5 +1,13 @@
+<dx-load-panel
+  [position]="{ of: '#announcements' }"
+  [(visible)]="loading"
+  [showIndicator]="true"
+  [hideOnOutsideClick]="false"
+>
+</dx-load-panel>
+<app-filter-panel (onReload)="reload($event)"></app-filter-panel>
 <ng-container *ngIf="!loading">
-  <ng-container *ngIf="announcements.length > 0; else notFound">
+  <ng-container *ngIf="announcements.length > 0; else notFound" id="announcements">
     <div class="announcements-container">
       <ng-container *ngFor="let item of announcements">
         <app-catalog-card

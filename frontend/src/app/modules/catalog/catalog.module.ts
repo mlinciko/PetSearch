@@ -11,6 +11,8 @@ import { DevExtremeModule } from '../dev-extreme/dev-extreme.module';
 import { AddAnnouncementComponent } from './components/add-announcement/add-announcement.component';
 import { AnnouncementToolbarComponent } from './components/announcement-toolbar/announcement-toolbar.component';
 import { EditAnnouncementComponent } from './components/edit-announcement/edit-announcement.component';
+import { UploadAnnImagesComponent } from './components/upload-ann-images/upload-ann-images.component';
+import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
 
 
 
@@ -21,6 +23,8 @@ import { EditAnnouncementComponent } from './components/edit-announcement/edit-a
     AddAnnouncementComponent,
     AnnouncementToolbarComponent,
     EditAnnouncementComponent,
+    UploadAnnImagesComponent,
+    FilterPanelComponent,
   ],
   imports: [
     CommonModule,

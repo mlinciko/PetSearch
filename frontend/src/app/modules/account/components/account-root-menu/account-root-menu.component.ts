@@ -30,6 +30,7 @@ export class AccountRootMenuComponent implements OnInit {
       items: PROFILE_MENU_ITEMS
     },
   ]
+  avatarDialog: boolean = false;
   constructor(
     private userService: UserService,
     private imageService: ImageService,
@@ -55,7 +56,7 @@ export class AccountRootMenuComponent implements OnInit {
   }
 
   getUserImage(imagePath: string): string {
-    return this.imageService.getFullImagePath(imagePath);
+    return this.imageService.getFullImagePath(imagePath, "users");
   }
 
   selectMenuItem(item: IMenuItem): void {
@@ -69,7 +70,11 @@ export class AccountRootMenuComponent implements OnInit {
   }
 
   loadAvatar(): void {
-    
+    this.avatarDialog = true;
+  }
+
+  closeLoadAvatar(): void {
+    this.avatarDialog = false;
   }
 
 }

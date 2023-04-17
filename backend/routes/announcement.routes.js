@@ -9,11 +9,14 @@ import {
   addAnnouncementToFavorites,
   deleteAnnouncementFromFavorites,
   getFavoriteAnnouncements,
-  closeAnnouncement
+  closeAnnouncement,
+  uploadImage
 } from '../services/announcement.service.js';
 import {
   verifyAccess,
-  decodeAccessToken
+  decodeAccessToken,
+  fileUploader,
+  fileExtLimiter
 } from '../middlewares/index.js'
 
 const router = Router()
@@ -29,5 +32,12 @@ router
   .post('/add-to-favorites', verifyAccess, addAnnouncementToFavorites)
   .delete('/delete-from-favorites', verifyAccess, deleteAnnouncementFromFavorites)
   .get('/close', verifyAccess, closeAnnouncement)
+  .post(
+    '/upload-image', 
+    verifyAccess, 
+    fileUploader, 
+    fileExtLimiter(['.png', '.jpg', '.jpeg']), 
+    uploadImage
+   )
 
 export default router

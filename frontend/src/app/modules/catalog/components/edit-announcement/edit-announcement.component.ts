@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DxFormComponent } from 'devextreme-angular';
 import { IDxFormItems } from 'src/app/models/models';
 import { ICreateAnnouncement, initialCreateAnnouncement } from '../../models/create-announcement.interface';
@@ -8,6 +8,9 @@ import { CommonService } from 'src/app/services/common.service';
 import { IAnnouncement } from '../../models/announcement.interface';
 import { Utils } from 'src/app/utils/ulits.class';
 import * as _ from 'lodash';
+import { ImageService } from 'src/app/services/image.service';
+import { Observable, combineLatest } from 'rxjs';
+import { UploadAnnImagesComponent } from '../upload-ann-images/upload-ann-images.component';
 
 @Component({
   selector: 'app-edit-announcement',
@@ -22,11 +25,14 @@ export class EditAnnouncementComponent implements OnInit {
 
   announcementId: number | null;
 
+  @ViewChild('uploader') uploader!: UploadAnnImagesComponent;
+  files: File[] = []
+
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private annService: AnnouncementService,
     private common: CommonService,
+    private imageService: ImageService,
   ) {
     const id = this.route.snapshot.paramMap?.get("id")
     this.announcementId = id ? +id : null;
@@ -44,6 +50,7 @@ export class EditAnnouncementComponent implements OnInit {
     this.annService.getAnnouncementById(this.announcementId)
     .subscribe(
       (ann: IAnnouncement) => {
+        this.loadImages(ann.images);
         this.formData = _.merge(this.formData, ann);
         _.forEach(Object.keys(this.formData), 
           (key) => {
@@ -139,14 +146,35 @@ export class EditAnnouncementComponent implements OnInit {
     ]
   }
 
+  loadImages(images: string[]): void {
+    if (!images.length) {
+      return;
+    }
+    const imagesObservable: Observable<any>[] = [];
+    images.forEach((image) => imagesObservable.push(this.imageService.getImageBlob(image)))
+    combineLatest(imagesObservable)
+    .subscribe(
+      (blobs) => {
+        let generatedFiles: File[] = [];
+        blobs.forEach(
+          (blob, index) => {
+            generatedFiles.push(new File([blob], images[index], blob))
+          }
+        )
+        this.files = generatedFiles;
+      }
+    )
+  }
+
   submitForm(): void {
-    if (this.form.instance.validate().isValid){
+    this.uploader.validate();
+    if (this.form.instance.validate().isValid && this.uploader.isValid()){
       this.annService.updateAnnouncement(
         {...this.formData, announcement_id: this.announcementId}
       )
       .subscribe(
         (res) => {
-          this.router.navigate([`/announcement/view/${res.announcement_id}`])
+          this.uploader.onSubmit(res.announcement_id);
         }
       )
     } 

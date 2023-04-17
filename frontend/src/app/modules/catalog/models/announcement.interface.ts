@@ -17,4 +17,5 @@ export interface IAnnouncement {
   pet_id: number,
   pet_type_name: string,
   is_favorite?: boolean,
+  images: string[],
 }

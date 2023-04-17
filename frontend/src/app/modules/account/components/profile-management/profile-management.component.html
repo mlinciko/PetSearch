@@ -44,3 +44,6 @@
     </dx-button>
   </div>
 </div>
+<dx-popup *ngIf="avatarDialog" title="Upload avatar" [(visible)]="avatarDialog" width="500px" height="200px">
+  <app-upload-avatar-dialog (onCloseEvent)="closeLoadAvatar()"></app-upload-avatar-dialog>
+</dx-popup>

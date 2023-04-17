@@ -1,0 +1,24 @@
+<div class="upload-container">
+  <dx-form #form width="100%" [(formData)]='formData' [items]="formItems">
+  </dx-form>
+  <dx-file-uploader
+        dialogTrigger=".dropzone-external"
+        dropZone=".dropzone-external"
+        #fileUploader
+        uploadMode="useForm"
+        [visible]="false"
+        [multiple]="true"
+        [allowedFileExtensions]="allowedTypes"
+        [maxFileSize]="1000000"
+        (onValueChanged)="onValueChanged($event)"
+    ></dx-file-uploader>
+
+    <div class="upload-images">
+      <ng-container *ngFor="let image of uploadedImages">
+        <div class="upload-image">
+          <img [src]="image.file" alt="Image">
+          <fa-icon class="upload-image__icon" [icon]="closeIcon" (click)="deleteFile(image)"></fa-icon>
+        </div>
+      </ng-container>
+    </div>
+</div>

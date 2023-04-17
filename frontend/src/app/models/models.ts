@@ -38,4 +38,5 @@ export const dictionaryParams: IDictioneryParam = {
   city: "city_id",
   pet: "pet_id",
   type: "type_id",
+  status: "status_id",
 }

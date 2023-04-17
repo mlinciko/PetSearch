@@ -5,7 +5,7 @@ import { DxFormComponent } from 'devextreme-angular';
 import { Utils } from 'src/app/utils/ulits.class';
 import { CommonService } from 'src/app/services/common.service';
 import { AnnouncementService } from '../../services/announcement.service';
-import { Router } from '@angular/router';
+import { UploadAnnImagesComponent } from '../upload-ann-images/upload-ann-images.component';
 
 @Component({
   selector: 'app-add-announcement',
@@ -14,13 +14,14 @@ import { Router } from '@angular/router';
   providers: [CommonService],
 })
 export class AddAnnouncementComponent implements OnInit {
+  @ViewChild('uploader') uploader!: UploadAnnImagesComponent;
   @ViewChild('form') form!: DxFormComponent;
   formItems!: IDxFormItems;
   formData: ICreateAnnouncement = initialCreateAnnouncement;
+  
   constructor(
     private common: CommonService,
     private ann: AnnouncementService,
-    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -112,11 +113,12 @@ export class AddAnnouncementComponent implements OnInit {
   }
 
   submitForm(): void {
-    if (this.form.instance.validate().isValid){
+    this.uploader.validate();
+    if (this.form.instance.validate().isValid && this.uploader.isValid()){
       this.ann.createAnnouncement(this.formData)
       .subscribe(
         (res) => {
-          this.router.navigate([`/announcement/view/${res.announcement_id}`])
+          this.uploader.onSubmit(res.announcement_id);
         }
       )
     } 

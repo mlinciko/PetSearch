@@ -19,10 +19,9 @@ export class CatalogComponent extends BaseCatalogComponent {
   constructor(
     private route: ActivatedRoute,
     protected override announcement: AnnouncementService,
-    protected override imageService: ImageService,
     protected override userService: UserService
   ) {
-    super(announcement, imageService, userService);
+    super(announcement, userService);
     this.type = this.route.snapshot.data['type'];
     this.loadAnnouncements();
   }
@@ -38,14 +37,17 @@ export class CatalogComponent extends BaseCatalogComponent {
     )
   }
 
-  loadAnnouncements(): void {
+  loadAnnouncements(params: HttpParams = new HttpParams()): void {
     if (this.type === "all") {
-      this.loadAllAnnouncementsByType();
+      this.loadAllAnnouncementsByType(params);
     } else {
-      let params = new HttpParams();
       params = params.append("type_id", this.type.id)
       this.loadAllAnnouncementsByType(params);
     }
+  }
+
+  reload(params: HttpParams): void {
+    this.loadAnnouncements(params);
   }
 
 }

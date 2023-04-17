@@ -2,7 +2,8 @@
   gap: 40px;
   display: flex;
   flex-wrap: wrap;
-  margin:40px auto;
+  justify-content: flex-start;
+  margin:0px auto 40px auto;
 }
 
 .announcement-not-found {

@@ -30,4 +30,8 @@ export class Utils {
     const paramName = dictionaryParams[dictionary];
     return paramName ? paramName : null;
   }
+
+  public static getFileType(filename: string): string | null {
+    return /[.]/.exec(filename) ? /[^.]+$/.exec(filename)![0].toLowerCase() : null;
+  }
 }

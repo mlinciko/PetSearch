@@ -1,6 +1,17 @@
 .announcement-container {
   width: 60%;
   margin: 100px auto;
+  display: flex;
+
+  &-right {
+    width: 40%;
+    padding: 30px;
+    padding-top:0;
+  }
+
+  &-left {
+    width: 60%;
+  }
 
   .create-button {
     margin-top:20px;
