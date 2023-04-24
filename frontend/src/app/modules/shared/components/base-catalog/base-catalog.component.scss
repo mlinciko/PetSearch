@@ -1,8 +1,8 @@
 .announcements-container {
-  gap: 40px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  grid-auto-rows: 1fr;
+  justify-content: space-between;
   margin:0px auto 40px auto;
 }
 

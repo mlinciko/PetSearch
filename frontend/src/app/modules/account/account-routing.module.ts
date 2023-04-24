@@ -26,6 +26,13 @@ const routes: Routes = [
       {
         path: "favorites",
         component: UserFavoritesComponent,
+      },
+      {
+        path: "chats",
+        loadChildren: () =>
+          import("../chats/chats.module").then(
+            (m) => m.ChatsModule
+          ),
       }
     ]
   },

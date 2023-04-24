@@ -1,0 +1,76 @@
+<div class="chat-container">
+  <div *ngIf="chat" class="chat-header">
+    <fa-icon class="chat-back" [icon]="backIcon" [routerLink]="['/account/chats']"></fa-icon>
+    <div class="chat-image">
+      <ng-container *ngIf="chat.announcement.images[0]; else noImageTemplate">
+        <img [src]="getImage(chat.announcement.images[0], 'announcements')" alt="Image">
+      </ng-container>
+      <ng-template #noImageTemplate>
+        <div class="chat-image__no-image-icon">
+          <fa-icon [icon]="pawIcon"></fa-icon>
+        </div>
+      </ng-template>
+    </div>
+    <div class="chat-title" [routerLink]="['/announcement/view/' + chat.announcement.announcement_id]">
+      <div class="chat-title-text">
+        <div class="chat-title-data">{{chat.announcement.title}}</div>
+        <div class="chat-title-companion">{{chat.companion.first_name}} {{chat.companion.last_name}}</div>
+      </div>
+      <div *ngIf="chat.announcement.status_id===2" class="chat-title__closed">closed</div>
+    </div>
+  </div>
+  <div #scrollMe class="chat-body">
+    <ng-container *ngFor="let message of messages">
+      <ng-container  *ngIf="message.user_id !== userId; else rightTemplate">
+        <div class="chat-message left">
+          <div class="user__face">
+            <ng-container *ngIf="chat.companion.image; else noImage">
+              <img class="user__image" [src]="getImage(chat.companion.image, 'users')" alt="image">
+            </ng-container>
+            <ng-template #noImage>
+              <fa-icon class="user__icon" [icon]="noImageIcon"></fa-icon>
+            </ng-template>
+          </div>
+          <div class="chat-message__text">
+            {{message.body}} 
+          </div>
+          <div class="chat-message__time">{{message.time | date : 'h:mm:ss'}}</div>
+        </div>
+      </ng-container>
+
+      <ng-template #rightTemplate>
+        <div class="chat-message right">
+          <div class="chat-message__time">{{message.time | date : 'h:mm:ss'}}</div>
+          <div class="chat-message__text">
+            {{message.body}}
+          </div>
+          <div class="user__face">
+            <ng-container *ngIf="userService.getUserImage() as userImage; else noImage">
+              <img class="user__image" [src]="getImage(userImage, 'users')" alt="image">
+            </ng-container>
+            <ng-template #noImage>
+              <fa-icon class="user__icon" [icon]="noImageIcon"></fa-icon>
+            </ng-template>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+    <div *ngIf="messages.length === 0" class="chat-body__no-message">
+      <fa-icon class="announcement-not-found__icon" [icon]="pawIcon"></fa-icon>
+      <div class="announcement-not-found__title">
+        No Messages
+      </div>
+      <div class="announcement-not-found__subtitle">
+        Start a conversation.
+      </div>
+    </div>
+  </div>
+  <div class="chat-footer">
+    <div class="chat-footer__editor">
+      <dx-text-box [(value)]="newMessage" placeholder="Write a message"></dx-text-box>
+      <fa-icon class="chat-footer__bth" [icon]="sendIcon" (click)="sendMessage(newMessage)"></fa-icon>
+    </div>
+    
+  </div>
+</div>
+

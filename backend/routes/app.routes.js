@@ -7,6 +7,7 @@ import typeRoutes from './type.routes.js'
 import petRoutes from './pet.routes.js'
 import statusRoutes from './status.routes.js'
 import imageRoutes from './image.routes.js'
+import chatRoutes from './chat.routes.js'
 
 const router = Router()
 
@@ -18,5 +19,6 @@ router.use('/type', typeRoutes)
 router.use('/pet', petRoutes)
 router.use('/status', statusRoutes)
 router.use('/image', imageRoutes)
+router.use('/chat', chatRoutes)
 
 export default router

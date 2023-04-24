@@ -18,7 +18,7 @@ export const ANNOUNCEMENTS_MENU_ITEMS: IMenuItem[] = [
 export const CHATS_MENU_ITEMS: IMenuItem[] = [
   {
     title: "Chats",
-    path: "/g",
+    path: "chats",
     icon: faCommentDots
   },
 ]

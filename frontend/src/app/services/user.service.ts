@@ -124,6 +124,10 @@ export class UserService {
     return this.user.value? this.user.value.user_id : null;
   }
 
+  getUserImage(): string | null {
+    return this.user.value? this.user.value.image : null;
+  }
+
   onCatchError(err: HttpErrorResponse, message: string): Observable<never> {
     if (err.status !== 403 && err.status !== 401) {
       notify({ message, type: "error", width: "auto"});

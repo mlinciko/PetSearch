@@ -6,11 +6,15 @@ import { faHeart, faLocationArrow, faPaw, faUserCircle } from '@fortawesome/free
 import { ImageService } from 'src/app/services/image.service';
 import { UserService } from 'src/app/services/user.service';
 import { confirm } from "devextreme/ui/dialog";
+import { ChatService } from 'src/app/modules/chats/services/chat.service';
+import { ICreateChatPayload } from 'src/app/modules/chats/models/create-chat-payload.iterface';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-announcement',
   templateUrl: './announcement.component.html',
-  styleUrls: ['./announcement.component.scss']
+  styleUrls: ['./announcement.component.scss'],
+  providers: [ChatService]
 })
 export class AnnouncementComponent implements OnInit {
   announcementId: number | null;
@@ -29,6 +33,7 @@ export class AnnouncementComponent implements OnInit {
     private annService: AnnouncementService,
     protected imageService: ImageService,
     protected userService: UserService,
+    private chat: ChatService,
   ) { 
     const id = this.route.snapshot.paramMap?.get("id")
     this.announcementId = id ? +id : null;
@@ -64,7 +69,22 @@ export class AnnouncementComponent implements OnInit {
   }
 
   writeToCteator(): void {
+    if (this.userService.isUserAuthrized()) {
+      const payload :ICreateChatPayload = {
+        announcement_id: this.announcement.announcement_id,
+        companion_id: this.announcement.user_id,
 
+      }
+      this.chat.createChat(payload)
+      .subscribe(
+        (res) => {
+          this.router.navigate(['/account/chats/room/' + res.room_id])
+        } 
+      )
+    } else {
+      notify({ message: "You are not authorized", type: "error", width: "auto"});
+    }
+    
   }
 
   changeFavorite(action: "add" | "delete", announcement: IAnnouncement): void {

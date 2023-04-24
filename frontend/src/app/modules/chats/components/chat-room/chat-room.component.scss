@@ -1,0 +1,149 @@
+.chat-container {
+  width: 80%;
+  background-color: #fff;
+  margin: 20px auto;
+  border-radius: 3px;
+
+  .chat-back {
+    cursor:pointer;
+  }
+
+  .chat-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    box-shadow: 0 5px 4px rgba(0, 0, 0, .2);
+
+    .chat-image {
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      background-color: rgba(0,0,0,0.1);
+      border-radius: 2px;
+
+      img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 2px;
+      }
+
+      &__no-image-icon {
+        padding: 12px 0;
+      }
+    }
+
+    .chat-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1 1 auto;
+      cursor: pointer;
+
+      &-companion {
+        font-size: 12px;
+        font-weight: 500;
+        padding-top: 10px;
+      }
+
+      &__closed {
+        font-weight: 400;
+        color: red;
+        padding: 2px 5px;
+        border-radius: 5px;
+        border: 1px solid red;
+        width: 60px;
+      }
+    }
+
+    .chat-title-data:hover {
+      color:rgba(45, 187, 215)
+    }
+
+  }
+
+  .chat-body {
+    display: flex;
+    flex-direction:column;
+    height: 400px;
+    padding: 20px 10px 0;
+    overflow: scroll;
+
+    &__no-message {
+      text-align: center;
+      font-weight: 200;
+      padding: 20% 0;
+    }
+
+    .chat-message {
+      display:flex;
+      align-items: center;
+      gap:10px;
+      margin-bottom:20px;
+
+      .user__face {
+        font-size:30px;
+
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+
+      &__text {
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      &__time {
+        font-size: 12px;
+        color: rgba(0,0,0,0.6);
+      }
+    }
+
+    .chat-message.left {
+      align-self: flex-start;
+      .chat-message__text {
+        background-color: rgba(0,0,0,0.1);
+      }
+    }
+    .chat-message.right {
+      align-self: flex-end;
+      .chat-message__text {
+        background-color: rgba(45, 187, 215, 0.5);
+      }
+    }
+  }
+
+  .chat-footer {
+    &__editor {
+      position: relative;
+    }
+
+    &__bth {
+      position: absolute;
+      top: 35%;
+      right: 20px;
+      font-size: 20px;
+      cursor: pointer;
+      color: rgb(45, 187, 215);
+    }
+  }
+}
+
+:host{
+  ::ng-deep {
+    .dx-texteditor.dx-editor-outlined {
+      border: none;
+      border-radius:0;
+    }
+    .dx-texteditor-input {
+      border:none;
+      border-radius:0;
+      padding:20px 10px;
+    }
+  }
+}

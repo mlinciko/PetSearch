@@ -13,13 +13,16 @@ import { HeaderComponent } from './modules/main/components/header/header.compone
 import { MaterialModule } from './modules/material/material.module';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { CookieService } from 'ngx-cookie-service';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 
 @NgModule({
   declarations: [
     AppComponent,
     MainRootComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,6 +31,7 @@ import { CookieService } from 'ngx-cookie-service';
     HttpClientModule,
     FontAwesomeModule,
     MaterialModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     AppGuard,

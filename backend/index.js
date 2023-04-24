@@ -6,11 +6,14 @@ import express, { json, urlencoded } from 'express'
 import {
   ALLOWED_ORIGIN,
   SENTRY_DSN,
-  SERVER_PORT
+  SERVER_PORT,
+  SERVER_SOCKET_PORT
 } from './config/index.js'
 import { setSecurityHeaders } from './middlewares/index.js'
 import router from './routes/app.routes.js'
 import createConncention from './utils/dbconnection.js';
+import { socketServer } from './socket-server.js'
+import startSocketActions from './socket/socket-actions.js';
 
 const app = express()
 
@@ -48,6 +51,8 @@ export const db = createConncention({
   database: "petSearch"
 })
 
+startSocketActions();
+
 app.use('/api', router)
 
 if (process.env.NODE_ENV === 'production') {
@@ -58,6 +63,10 @@ if (process.env.NODE_ENV === 'production') {
     res.status(500).json({ message: 'Something went wrong. Try again later' })
   })
 }
+
+socketServer.listen(SERVER_SOCKET_PORT || 3001, () => {
+  console.log(`🚀 Socket server ready on http://localhost:${SERVER_SOCKET_PORT || 3000}`);
+});
 
 app.listen(SERVER_PORT || 3000, () => {
   console.log(`🚀 Server ready on http://localhost:${SERVER_PORT || 3000}`)

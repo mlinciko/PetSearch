@@ -44,6 +44,7 @@ export class FilterPanelComponent implements OnInit {
                 label: { text: 'Search', visible: false },
                 editorOptions: {
                   labelMode: 'floating',
+                  showClearButton: true,
                   onInput: (e: any): void => {
                     this.configureParams(e.component.option("text"), "search");
                   }
@@ -70,6 +71,7 @@ export class FilterPanelComponent implements OnInit {
                       labelMode: 'floating',
                       valueExpr: "pet_id",
                       displayExpr: "name",
+                      showClearButton: true,
                       onValueChanged: (e: any): void => {
                         this.configureParams(e.value, "pet_id");
                       }
@@ -85,6 +87,7 @@ export class FilterPanelComponent implements OnInit {
                       labelMode: 'floating',
                       valueExpr: "city_id",
                       displayExpr: "name",
+                      showClearButton: true,
                       onValueChanged: (e: any): void => {
                         this.configureParams(e.value, "city_id");
                       }
@@ -100,6 +103,7 @@ export class FilterPanelComponent implements OnInit {
                       labelMode: 'floating',
                       valueExpr: "status_id",
                       displayExpr: "name",
+                      showClearButton: true,
                       onValueChanged: (e: any): void => {
                         this.configureParams(e.value, "status_id");
                       }
@@ -115,6 +119,11 @@ export class FilterPanelComponent implements OnInit {
   }
 
   configureParams(value: number | string, key: string): void {
+    if (!value) {
+      this.params = this.params.delete(key);
+      this.onReload.emit(this.params);
+      return;
+    }
     if (this.params.has(key)) {
       this.params = this.params.delete(key);
     }

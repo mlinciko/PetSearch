@@ -15,7 +15,8 @@ const ANNOUNCEMENT_QUERY = () => {
     Announcement.type_id, Type.name as type_name, 
     Announcement.status_id, Status.name as status_name, 
     Announcement.user_id, User.first_name as user_first_name, 
-    User.last_name as user_last_name, Announcement.city_id, 
+    User.last_name as user_last_name, 
+    User.image as user_image, Announcement.city_id, 
     City.name as city_name, Announcement.pet_id, 
     PetType.name as pet_type_name  
   FROM Announcement 
@@ -40,7 +41,8 @@ const ANNOUNCEMENT_QUERY_WITH_FAVORITES = (userId, joinType = "LEFT") => {
     Announcement.type_id, Type.name as type_name, 
     Announcement.status_id, Status.name as status_name, 
     Announcement.user_id, User.first_name as user_first_name, 
-    User.last_name as user_last_name, Announcement.city_id, 
+    User.last_name as user_last_name, 
+    User.image as user_image, Announcement.city_id, 
     City.name as city_name, Announcement.pet_id, 
     PetType.name as pet_type_name,
     if(favorites_filtred.announcement_id is Null, False, True) as is_favorite
@@ -486,7 +488,7 @@ export const uploadImage = async(req, res, next) => {
   }
 }
 
-async function addImages(announcements) {
+export async function addImages(announcements) {
   for (const announcement of announcements) {
     const images = await db.query(`SELECT path FROM AnnouncementImages 
       WHERE announcement_id=${announcement.announcement_id}`);

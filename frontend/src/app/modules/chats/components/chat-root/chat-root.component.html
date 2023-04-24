@@ -1,0 +1,31 @@
+<ng-container *ngIf="chats.length; else noChatsTemplate">
+  <div class="chats-container">
+    <div *ngFor="let chat of chats" class="chat" [routerLink]="['room/'+ chat.room_id]">
+      <div class="chat-image">
+        <ng-container *ngIf="chat.announcement.images[0]; else noImageTemplate">
+          <img [src]="getImage(chat.announcement.images[0])" alt="Image">
+        </ng-container>
+        <ng-template #noImageTemplate>
+          <div class="chat-image__no-image-icon">
+            <fa-icon [icon]="pawIcon"></fa-icon>
+          </div>
+        </ng-template>
+      </div>
+      <div class="chat-data">
+        <div class="chat-title">
+          {{chat.announcement.title}}
+          <div *ngIf="chat.announcement.status_id===2" class="chat-data__closed">closed</div>
+        </div>
+        <div class="chat-companion">{{chat.announcement.user_first_name}} {{chat.announcement.user_last_name}}</div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #noChatsTemplate>
+  <div class="chats-not-found">
+    <fa-icon class="chats-not-found__icon" [icon]="pawIcon"></fa-icon>
+    <div class="chats-not-found__title">
+      You don't have chats yet
+    </div>
+  </div>
+</ng-template>
