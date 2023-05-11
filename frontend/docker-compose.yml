@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  angular:
+    image: node:16.3.0-alpine
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: angular
+    ports:
+      - '4200:4200'

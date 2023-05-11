@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  nodejs: 
+    image: node:16.3.0-alpine
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: nodejs
+    ports:
+      - '3000:3000'
+    links:
+     - mysql
+  mysql:
+    image: mysql
+    volumes:
+      - "./data:/var/lib/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=mlinciko
+      - MYSQL_PASSWORD=mlinciko
+      - MYSQL_DATABASE=PetSearch
+    ports:
+      - 3307:3306
+    expose:
+      - 3307
+    healthcheck:
+      test: ['CMD', "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 1s
+      retries: 10
+  
